@@ -23,7 +23,7 @@ check=$(ls $sequence_data/0032406a-20bf-4092-832e-d73a3da4c00d/*.bam)
 if [ -z "$check" ]; then
     cd $sequence_data
     gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t $results/gdc-user-token.2019-08-23T00_36_21.797Z.txt
-    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-2)
+    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
     samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
     samtools view -b -f 4 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam > $results/$Name/$Name.unmapped.bam
@@ -31,7 +31,7 @@ if [ -z "$check" ]; then
     gzip $results/$Name/$Name-header
 else
     cd $sequence_data
-    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-2)
+    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     #mkdir $results/$Name/ 
     #samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
     samtools view -b -f 4 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam > $results/$Name/$Name.unmapped.bam
