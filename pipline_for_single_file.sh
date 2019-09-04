@@ -19,6 +19,7 @@ module load BEDTools/2.26.0-foss-2016b
 module load BWA/0.7.17-foss-2016b
 
 # check if the file is downloaded
+
 check=$(ls $sequence_data/0032406a-20bf-4092-832e-d73a3da4c00d/*.bam)
 if [ -z "$check" ]; then
     cd $sequence_data
