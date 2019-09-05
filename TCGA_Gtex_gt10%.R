@@ -42,7 +42,7 @@ for (i in 1:length(col_names)){
       Gtex_sample_gtcutoff <- c(Gtex_sample_gtcutoff, Gtex_species_enrichment)
     }
   }
-  if (length(Gtex_sample_gtcutoff) >= Gtex_sample_amount*sample_amout_cuttoff){
+  if (length(Gtex_sample_gtcutoff) >= 0){
     Gtex_species_gtcutoff <- c(Gtex_species_gtcutoff,col_names[i] )
     Gtex_sample_number <- c(Gtex_sample_number,length(Gtex_sample_gtcutoff)/Gtex_sample_amount)
     Gtex_median_value <- median(Gtex_sig_data[ ,i] )
@@ -60,7 +60,7 @@ for (i in 1:length(col_names)){
       TCGA_sample_gtcutoff <- c(TCGA_sample_gtcutoff, TCGA_species_enrichment)
     }
   }
-  if (length(TCGA_sample_gtcutoff) >= TCGA_sample_amount*sample_amout_cuttoff){
+  if (length(TCGA_sample_gtcutoff) >= 0){
     TCGA_species_gtcutoff <- c(TCGA_species_gtcutoff,col_names[i] )
     TCGA_sample_number <- c(TCGA_sample_number ,length(TCGA_sample_gtcutoff)/TCGA_sample_amount)
     TCGA_median_value <- median(TCGA_sig_data[ ,i] )
@@ -72,7 +72,6 @@ for (i in 1:length(col_names)){
   }
 }
 
-
 n <- max(length(TCGA_species_gtcutoff),length(Gtex_species_gtcutoff))
 new_Gtex_species_gtcutoff = c(Gtex_species_gtcutoff, rep(NA,n - length(Gtex_species_gtcutoff)))
 new_TCGA_species_gtcutoff = c(TCGA_species_gtcutoff, rep(NA,n - length(TCGA_species_gtcutoff)))
@@ -83,7 +82,7 @@ new_TCGA_each_species_median = c(TCGA_each_species_median, rep(NA,n - length(TCG
 
 df <- data.frame(TCGA_species=new_TCGA_species_gtcutoff, TCGA_samplegtcutoff_ratio =new_TCGA_sample_number, TCGA_species_median=new_TCGA_each_species_median,  
                  Gtex_species=new_Gtex_species_gtcutoff, Gtex_samplegtcutoff_ratio=new_Gtex_sample_number,Gtex_species_median=new_Gtex_each_species_median)
-write.table(df, file= '/Users/kun-linho/Desktop/TCGA_Gtex_TotalSpecies_Sign_gt20.txt', row.names = F, quote= F, sep = '\t')
+write.table(df, file= '/Users/kun-linho/Desktop/TCGA_Gtex_TotalSpecies_Sign_nocutoff.txt', row.names = F, quote= F, sep = '\t')
 
 
 ################# second part #####################
@@ -153,8 +152,11 @@ for (i in TCGA_species){
 Gtex_median <- as.numeric(na.omit(Gtex_median))
 
 Gtex_df <- data.frame(Gtex_species =Gtex_overlap_species, Gtex_species_pvalue = Gtex_overlap_species_pvalue, Gtex_amount_ratio = Gtex_pvalue_sample_amount, Gtex_species_median = Gtex_median )
-
 TCGA_df <- data.frame(TCGA_species = TCGA_overlap_species, TCGA_species_pvalue = TCGA_overlap_species_pvalue, TCGA_amount_ratio = TCGA_pvalue_sample_amount,TCGA_species_median = TCGA_median)
 
-write.table(Gtex_df, file= '/Users/kun-linho/Desktop/Gtex_TotalSpecies_Sign_gt20_summary.txt', row.names = F, quote= F, sep = '\t')
-write.table(TCGA_df, file= '/Users/kun-linho/Desktop/TCGA_TotalSpecies_Sign_gt20_summary.txt', row.names = F, quote= F, sep = '\t')
+final_Median_Pvalue_ratio <- cbind(Gtex_df,TCGA_df)
+
+
+
+write.table(final_Median_Pvalue_ratio, file= '/Users/kun-linho/Desktop/TCGA_Gtex_TotalSpecies_final_Median_Pvalue_ratio_summary.txt', row.names = F, quote= F, sep = '\t')
+

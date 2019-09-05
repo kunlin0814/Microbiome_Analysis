@@ -5,11 +5,10 @@ Created on Thu Jun 13 14:05:02 2019
 
 @author: kun-linho
 """
-
 import sys
 import math
-file_name=sys.argv[1]
-total_reads_file=sys.argv[2]
+file_name=sys.argv[1] # here the input is the species-summary-fill0
+total_reads_file=sys.argv[2] # total read file for each sample
 with open (total_reads_file, 'r')as f1:
     file1=f1.read()
     
