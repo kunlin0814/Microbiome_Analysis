@@ -1,6 +1,7 @@
 # this script take input file of Gtex and TCGA species enrichment (species count /total_read) of each sample 
 # to plot the distribution of  all species and tranfrom to log2 or not
 # the purpose of this script is try to identify of the thersheld of the species enrichemnt (from the two png file)
+# to know what enrichment value to use to identify the what is the cutoff value of the background enrichment (not random)
 
 
 Gtex_TCGA_enrichment <- read_excel("/Users/kun-linho/Desktop/08_06microbiome_Study.xlsx",sheet ='Histogram_Gtex_TCGA_blood')

@@ -6,7 +6,7 @@ library(Biobase)
 # the input file is the overlap species between TCGA and Gtex and the reads for each sample
 # the script is try to find the statistically signifiant species use wilcox test 
 # and also plot the distribution for each statistically significant species
-# once we get the raw p_value, we will adjust the pvalue
+# once we get the raw p_value, we will adjust the pvalue using the other scripts (Get_significant_spcies_and_distribution)
 TCGA_all_species <-  read_excel('/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx',sheet = 'TCGA_species') 
 Gtex_all_species <- read_excel('/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx',sheet = 'Gtex_species')
 
@@ -35,7 +35,7 @@ for (i in 2:length(col_names)){
   Gtex_species_value <- Gtex_all_species[, i]
   wilcox <- wilcox.test(as.numeric(TCGA_species_value),as.numeric(Gtex_species_value), alt="two.sided",paired = F, correct=T)
   p_value=wilcox$p.value
-  if (p_value < 0.05){
+  if (p_value < 0.05){ # here the p_value is the raw pvalue of wilcox text
     significant_species <- col_names[i] 
     TCGA_sign_value <- TCGA_all_species[, i]
     TCGA_log2_value <- log2(as.numeric(TCGA_all_species[, i])+0.00001)
@@ -67,7 +67,7 @@ write.table(species_pvalue, file ="/Users/kun-linho/Desktop/Species_pvalue.txt",
 library('FSA')
 Data = species_pvalue[order(species_pvalue$Species_pvalue),]
 headtail(Data)
-adjust_pvalue <- p.adjust(data$Species_pvalue, method ="hochberg")
+adjust_pvalue <- p.adjust(Data$Species_pvalue, method ="hochberg", n = length(Data$Species_pvalue))
 Data$Bonferroni = p.adjust(Data$Species_pvalue, method = "bonferroni")
 Data$BH = p.adjust(Data$Species_pvalue, method = "BH")
 Data$Holm = p.adjust(Data$ Species_pvalue, method = "holm")
@@ -76,5 +76,5 @@ Data$Hommel = p.adjust(Data$ Species_pvalue, method = "hommel")
 Data$BY = p.adjust(Data$ Species_pvalue, method = "BY")
 
 #write.table(Data, file ="/Users/kun-linho/Desktop/Species_adjust_different_methods.txt", row.names=F, sep ="\t",quote = F  )
-data_with_adjust_pvalue <- data.frame(adjustP= adjust_pvalue, Species=data$Species )
+data_with_adjust_pvalue <- data.frame(BH_adjust_p= Data$BH, Species=Data$Species, row_P= Data$Species_pvalue )
 write.table(data_with_adjust_pvalue, file ="/Users/kun-linho/Desktop/Species_hochberg_adjustpvalue.txt", row.names=F, sep ="\t",quote = F  )

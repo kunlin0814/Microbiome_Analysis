@@ -1,3 +1,6 @@
+## in this script, I was going to give a cutoff for TCGA sample ratio, but now I decide to keep everything 
+## and use excel to sort the TCGA ratio for me
+
 library(dplyr)
 library(readxl)
 library(Biobase)
@@ -82,7 +85,7 @@ new_TCGA_each_species_median = c(TCGA_each_species_median, rep(NA,n - length(TCG
 
 df <- data.frame(TCGA_species=new_TCGA_species_gtcutoff, TCGA_samplegtcutoff_ratio =new_TCGA_sample_number, TCGA_species_median=new_TCGA_each_species_median,  
                  Gtex_species=new_Gtex_species_gtcutoff, Gtex_samplegtcutoff_ratio=new_Gtex_sample_number,Gtex_species_median=new_Gtex_each_species_median)
-write.table(df, file= '/Users/kun-linho/Desktop/TCGA_Gtex_TotalSpecies_Sign_nocutoff.txt', row.names = F, quote= F, sep = '\t')
+#write.table(df, file= '/Users/kun-linho/Desktop/TCGA_Gtex_TotalSpecies_Sign_nocutoff.txt', row.names = F, quote= F, sep = '\t')
 
 
 ################# second part #####################
