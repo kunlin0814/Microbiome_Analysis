@@ -66,8 +66,6 @@ for (i in 2:length(Overlap_species)){
     species <- c(species, Overlap_species[i] )
     
   }
-  else 
-    print(paste(Overlap_species[i],">0.05"))
 }
 
 dev.off()
@@ -157,9 +155,7 @@ for (i in 1:length(col_names)){
     Gtex_median_value <- median(as.numeric(Gtex_sig_data[ ,i] ))
     Gtex_each_species_median <- c(Gtex_each_species_median, Gtex_median_value)
   }
-  else {
-    print(paste("Gtex ",col_names[i],"didn't pass", sep="",collapse="" ))
-  }
+  
 }
 
 
@@ -177,9 +173,6 @@ for (i in 1:length(col_names)){
     TCGA_median_value <- median(as.numeric(TCGA_sig_data[ ,i] ))
     TCGA_each_species_median <- c(TCGA_each_species_median,TCGA_median_value )
     
-  }
-  else {
-    print( paste("TCGA ",col_names[i],"didn't pass", sep="",collapse="" ))
   }
 }
 
@@ -249,4 +242,4 @@ combine <- data.frame(TCGA_Gtexoverlap=TCGA_overlap_species,
                       Gtex_sample_ratio = Gtex_pvalue_sample_amount,
                       Gtex_species_median = df$Gtex_species_median)
 combine <- combine[order(-combine$TCGA_sample_ratio),]
-write.table(combine,"/Users/kun-linho/Desktop/Species_pass_Sample_no_cutoff_test.txt",row.names = F, quote= F, sep = '\t')
+write.table(combine,"/Users/kun-linho/Desktop/TCGA_Gtex_significant_species_summary.txt",row.names = F, quote= F, sep = '\t')
