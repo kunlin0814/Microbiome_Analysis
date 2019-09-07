@@ -2,8 +2,8 @@
 #PBS -q batch
 #PBS -N 0032406a-20bf-4092-832e-d73a3da4c00d-TCGA
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=300:00:00
-#PBS -l pmem=60gb 
+#PBS -l walltime=150:00:00
+#PBS -l pmem=35gb 
 #PBS -M kh31516@uga.edu
 #PBS -m ae
 
@@ -19,11 +19,12 @@ module load BEDTools/2.26.0-foss-2016b
 module load BWA/0.7.17-foss-2016b
 
 # check if the file is downloaded
+cd $sequence_data
+check=$(ls | grep -i "0032406a-20bf-4092-832e-d73a3da4c00d")
 
-check=$(ls $sequence_data/0032406a-20bf-4092-832e-d73a3da4c00d/*.bam)
-if [ -z "$check" ]; then
+if [ -z "$check" ];then
     cd $sequence_data
-    gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t $results/gdc-user-token.2019-08-23T00_36_21.797Z.txt
+    gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t $/scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
     Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
     samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
@@ -33,8 +34,8 @@ if [ -z "$check" ]; then
 else
     cd $sequence_data
     Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
-    #mkdir $results/$Name/ 
-    #samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
+    mkdir $results/$Name/ 
+    samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
     samtools view -b -f 4 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam > $results/$Name/$Name.unmapped.bam
     samtools view 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|awk '{print $1}' > $results/$Name/$Name-header
     gzip $results/$Name/$Name-header
