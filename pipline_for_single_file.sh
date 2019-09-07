@@ -24,7 +24,11 @@ check=$(ls | grep -i "0032406a-20bf-4092-832e-d73a3da4c00d")
 
 if [ -z "$check" ];then
     cd $sequence_data
+<<<<<<< HEAD
     gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t $/scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
+=======
+    gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
+>>>>>>> bbb62fb9f3465b55c111f151c6cbe4758190b49b
     Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
     samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
