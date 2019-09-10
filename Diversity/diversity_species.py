@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 13 14:05:02 2019
+# here the input is the species-summary-sort-fill0
+# the script will create the enrichment and diversity of each samples 
+# and then use shell script to get total_sample enrichment and diversity
 
-@author: kun-linho
-"""
 import sys
 import math
-file_name=sys.argv[1] # here the input is the species-summary-fill0
+file_name=sys.argv[1] # here the input is the species-summary-sort-fill0
 total_reads_file=sys.argv[2] # total read file for each sample
 with open (total_reads_file, 'r')as f1:
     file1=f1.read()

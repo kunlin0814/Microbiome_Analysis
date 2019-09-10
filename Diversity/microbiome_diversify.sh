@@ -5,7 +5,10 @@
 #PBS -l mem=20gb
 
 cd /scratch/kh31516/TCGA/Stomach_original/Stomach/results/
+
+
 : "
+# the python script micro_phylum_enrich.py give you the enrichemnt of specific species
 while read line;
 do 
     cd /scratch/kh31516/TCGA/Stomach_original/Stomach/results/$line
@@ -14,7 +17,8 @@ do
     python3 /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/micro_species_enrich.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0 ${line}-TotalReads
 
 done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/TCGA_total_cases.txt
-
+"
+: "
 while read line;
 do 
     cd /scratch/kh31516/TCGA/Stomach_original/Stomach/results/$line
@@ -23,7 +27,7 @@ do
     cat fuso_enrich_species.txt >> /scratch/kh31516/TCGA/Stomach_original/Stomach/results/fuso_species_sum.txt
 done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/TCGA_total_cases.txt
 "
-
+## the python script diversity_species.py give you the distribution and diversity of the totoal species, families, and phylum
 while read line;
 do 
     cd /scratch/kh31516/TCGA/Stomach_original/Stomach/results/$line
@@ -32,6 +36,8 @@ do
     python3 /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/diversity_phylum.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum-sort ${line}-TotalReads
 done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/TCGA_total_cases.txt
 
+
+# cat the summary of each sample to total samples
 while read line;
 do 
     cd /scratch/kh31516/TCGA/Stomach_original/Stomach/results/$line

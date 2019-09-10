@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 23 12:06:28 2019
 
-@author: kun-linho
-"""
 
 # we don't apply the total reads cutoff to find the overlap species with Gtex
 import sys
-
-with open ('/scratch/kh31516/TCGA/Stomach/results/total_species_sort_TCGA.txt' ,'r') as f: # take the file names as an input ex: sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
+# take the file names as an input ex: sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
+with open ('/scratch/kh31516/TCGA/Stomach/results/total_species_sort_TCGA.txt' ,'r') as f: 
     total_file=f.read()
     total_name=total_file.split('\n')[:-1]
     
