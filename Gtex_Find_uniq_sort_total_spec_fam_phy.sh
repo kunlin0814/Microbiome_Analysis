@@ -8,18 +8,19 @@
 #while read line;
 #do
 #cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/WGS_random.sample_wtih_run.txt | grep -i $line
-#done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/finish/Gtex_samples.txt
-cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/finish/
+#done < /Volumes/TCGA_CRC/TCGA/CRC/finish/Gtex_samples.txt
+cd /Volumes/TCGA_CRC/TCGA/CRC
 
-while read line1 line2;
+while read line ;
 do
-    cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/finish/$line1
-    cat HumanMicroBiome/${line2}.sam-readsID-PhylumFamilySpecies-SpeciesSum >>/scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_species.txt
-    cat HumanMicroBiome/${line2}.sam-readsID-PhylumFamilySpecies-PhylumSum >>/scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_phylum.txt
-    cat HumanMicroBiome/${line2}.sam-readsID-PhylumFamilySpecies-FamilySum >>/scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_family.txt
+    cd /Volumes/TCGA_CRC/TCGA/CRC/$line
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum >>/Volumes/TCGA_CRC/TCGA/CRC/total_species.txt
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum >>/Volumes/TCGA_CRC/TCGA/CRC/total_phylum.txt
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum >>/Volumes/TCGA_CRC/TCGA/CRC/total_family.txt
 
-done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/Gtex_30sample_run.txt
+done < /Volumes/TCGA_CRC/TCGA/Total_CRC_cases.txt
 
-cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_species.txt | uniq | sort > Total_Uniq_Species.txt
-cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_phylum.txt | uniq | sort > Total_Uniq_Phylum.txt
-cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_family.txt | uniq | sort > Total_Uniq_Family.txt
+cat /Volumes/TCGA_CRC/TCGA/total_species.txt | cut -d " " -f1 | sort | uniq > Total_Uniq_Species.txt
+cat /Volumes/TCGA_CRC/TCGA/total_phylum.txt  | cut -d " " -f1 | sort | uniq > Total_Uniq_Phylum.txt
+cat /Volumes/TCGA_CRC/TCGA/total_family.txt  | cut -d " " -f1 | sort | uniq > Total_Uniq_Family.txt
+
