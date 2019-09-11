@@ -1,6 +1,6 @@
 #PBS -S /bin/bash
 #PBS -q batch
-#PBS -N 0032406a-20bf-4092-832e-d73a3da4c00d-TCGA
+#PBS -N ed5b5738-8484-44b0-a476-d5141cbda574-TCGA
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=150:00:00
 #PBS -l pmem=35gb 
@@ -8,7 +8,7 @@
 #PBS -m ae
 
 sequence_data='/scratch/kh31516/TCGA/colon/data'
-results='/scratch/kh31516/TCGA/colon/results'
+results='/scratch/kh31516/TCGA/colon/results/Blood'
 HumanMicroBiome_source='/scratch/kh31516/TCGA/jin_source/HumanMicroBiome' 
 
 cd $sequence_data
@@ -20,28 +20,24 @@ module load BWA/0.7.17-foss-2016b
 
 # check if the file is downloaded
 cd $sequence_data
-check=$(ls | grep -i "0032406a-20bf-4092-832e-d73a3da4c00d")
+check=$(ls | grep -i "ed5b5738-8484-44b0-a476-d5141cbda574")
 
 if [ -z "$check" ];then
     cd $sequence_data
-<<<<<<< HEAD
-    gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t $/scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
-=======
-    gdc-client download 0032406a-20bf-4092-832e-d73a3da4c00d -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
->>>>>>> bbb62fb9f3465b55c111f151c6cbe4758190b49b
-    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
+    gdc-client download ed5b5738-8484-44b0-a476-d5141cbda574 -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
+    Name=$(echo ed5b5738-8484-44b0-a476-d5141cbda574/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
-    samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|awk '{print $1}' > $results/$Name/$Name-header
+    samtools view -b ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|wc -l > $results/$Name/$Name-TotalReads
+    samtools view -b -f 4 ed5b5738-8484-44b0-a476-d5141cbda574/*.bam > $results/$Name/$Name.unmapped.bam
+    samtools view ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|awk '{print $1}' > $results/$Name/$Name-header
     gzip $results/$Name/$Name-header
 else
     cd $sequence_data
-    Name=$(echo 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
+    Name=$(echo ed5b5738-8484-44b0-a476-d5141cbda574/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
-    samtools view -b 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 0032406a-20bf-4092-832e-d73a3da4c00d/*.bam|awk '{print $1}' > $results/$Name/$Name-header
+    samtools view -b ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|wc -l > $results/$Name/$Name-TotalReads
+    samtools view -b -f 4 ed5b5738-8484-44b0-a476-d5141cbda574/*.bam > $results/$Name/$Name.unmapped.bam
+    samtools view ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|awk '{print $1}' > $results/$Name/$Name-header
     gzip $results/$Name/$Name-header
 fi
 
