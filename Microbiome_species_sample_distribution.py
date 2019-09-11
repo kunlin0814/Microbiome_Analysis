@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 import sys
 
 with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/total_blood_TCGA_species_fill0.txt.txt' ,'r') as f:
@@ -23,10 +24,10 @@ for file_name in total_name:
                 species_count += int(TCGA_species_file[i].split()[1])
                 each_file[each_file_name]=float(species_count*1000000/total_reads)
 
-threshold_count = [49.86]
+threshold_count = [0]
 for j in threshold_count :
     pass_files = []
-    file_output = open('threshold_count_'+str(j)+'file_summary.txt','w')
+    file_output = open('/scratch/kh31516/TCGA/Stomach_original/Stomach/threshold_count_'+str(j)+'file_no_pass_summary.txt','w')
     for i in each_file.keys():
         if each_file[i] > int(j):
             pass_files.append(i)
@@ -86,48 +87,4 @@ for j in threshold_count :
             #file_species_summary.write(str(key)+'\t')  
 file_output.close()
 file_species_summary.close()
-Species_With_cutoff.close()             
-              
-with open("/scratch/kh31516/TCGA/Stomach_original/Stomach/TCGA_blood_Species_with_cutoff.txt",'r') as f :
-    file = f.read()
-
-total_file = file.split('\n')[:-1]
-Total_cutOff_species = [] 
-
-for i in range(0, len(total_file),2):
-    each_Sample_Species = total_file[i].split('\t')[1:-1]
-    for species in each_Sample_Species : 
-        if species not in Total_cutOff_species :
-            Total_cutOff_species.append(species)
-            
-Total_cutOff_species.sort()
-species_cut_off = float(3.36/112)
-
-Species_sig_cutoff = open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/TCGA_blood_Sig_species_cutoff.txt','w')
-for pass_file in pass_files:
-    pass_file_name = pass_file.split("HumanMicroBiome")[0].split('/')[-2]
-    with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/results/'+pass_file_name+'/'+pass_file_name+'-TotalReads','r') as f1:
-        new_total_reads=int(f1.read())
-    with open (pass_file ,'r')as f:
-        Total_cutOff_species_Dict = {}
-        score = {}
-        TCGA_species_file= f.read().split('\n')[:-1]
-        for i in range(len(TCGA_species_file)):
-            name = TCGA_species_file[i].split()[0]
-            value = TCGA_species_file[i].split()[1]
-            score[name] = value
-        for i in Total_cutOff_species:
-            if float(int(score[i])* 1000000/ new_total_reads) > species_cut_off:
-                Total_cutOff_species_Dict[i] =   float(int(score[i])* 1000000/ new_total_reads)
-            else :
-                Total_cutOff_species_Dict[i] = 0
-    Species_sig_cutoff.write('\t')
-    for key in Total_cutOff_species_Dict.keys():
-        Species_sig_cutoff.write(str(key)+'\t')
-    Species_sig_cutoff.write('\n')
-    Species_sig_cutoff.write(str(pass_file_name)+'\t')
-    for key in Total_cutOff_species_Dict.keys():
-        Species_sig_cutoff.write(str(Total_cutOff_species_Dict[key])+'\t')
-    Species_sig_cutoff.write('\n')
-        
-Species_sig_cutoff.close()
+Species_With_cutoff.close()    
