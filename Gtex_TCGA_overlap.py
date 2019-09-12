@@ -78,6 +78,8 @@ for i in range(len(Gtex)) :
     Gtex_ratio =  Gtex[i].split('\t')[3]
     Gtex_Species_summary[Gtex_species]=Gtex_ratio
     
+Gtex_Species_total = sorted(list(Gtex_Species_summary.keys()))
+
 with open ('/scratch/kh31516/TCGA/Stomach/TCGA_species_summary.txt', 'r' )as f1:
     TCGA_file = f1.read()
     TCGA = TCGA_file.split('\n')[:-1]
@@ -87,51 +89,62 @@ for i in range(len(TCGA)) :
     TCGA_ratio =  TCGA[i].split('\t')[3]
     TCGA_Species_summary[TCGA_species]=TCGA_ratio
 
+TCGA_Species_total = sorted(list(TCGA_Species_summary.keys()))
 
-for i in Gtex_Species_summary.keys():
-    if i in TCGA_Species_summary.keys():
+for i in Gtex_Species_total:
+    if i in TCGA_Species_total:
         Gtex_Species_overlap[i] = Gtex_Species_summary[i]
     else:
         Gtex_Species_uniq[i]= Gtex_Species_summary[i]
 
-for i in TCGA_Species_summary.keys():
-    if i in Gtex_Species_summary.keys():
+Gtex_Species_overlap_list = sorted(list(Gtex_Species_overlap.keys()))
+Gtex_Species_uniq_list = sorted(list(Gtex_Species_uniq.keys()))
+
+for i in TCGA_Species_total:
+    if i in Gtex_Species_total:
         TCGA_Species_overlap[i] = TCGA_Species_summary[i]
     else:
         TCGA_Species_uniq[i] =TCGA_Species_summary[i]
 
+TCGA_Species_overlap_list = sorted(list(TCGA_Species_overlap.keys()))
+TCGA_Species_uniq_list = sorted(list(TCGA_Species_uniq.keys()))
 
 g_overlap = open ('/scratch/kh31516/TCGA/Stomach/no_cut_micr_Gtex_Species_overlap.txt', 'w')
+g_overlap.write('Gtex_overlap_species'+'\t'+'Gtex_blood_ratio\n')
 
-for i in Gtex_Species_overlap.keys():
-    g_overlap.write(str(i) + '\t' + str(Gtex_Species_overlap[i]))
+for i in Gtex_Species_overlap_list:
+    g_overlap.write(str(i) + '\t'+ str(Gtex_Species_overlap[i]))
     g_overlap.write('\n')
-
+   
 g_overlap.close()
 
 T_overlap = open ('/scratch/kh31516/TCGA/Stomach/no_cut_micr_TCGA_Species_overlap.txt', 'w')
-for i in TCGA_Species_overlap.keys():
-    T_overlap.write(str(i) + '\t' + str(TCGA_Species_overlap[i]))
+T_overlap.write('TCGA_overlap_species'+'\t'+ 'TCGA_blood_ratio\n')
+
+for i in TCGA_Species_overlap_list:
+    T_overlap.write(str(i) + '\t' +str(TCGA_Species_overlap[i]))
     T_overlap.write('\n')
 
 T_overlap.close()
 
 G_uniq = open ('/scratch/kh31516/TCGA/Stomach/no_cut_micr_Gtex_Species_uniq.txt', 'w')
-for i in Gtex_Species_uniq.keys():
+G_uniq.write('Gtex_uniq_species'+'\t'+ 'Gtex_blood_ratio\n')
+
+for i in Gtex_Species_uniq_list:
     G_uniq.write(str(i) +'\t' + str(Gtex_Species_uniq[i]))
     G_uniq.write('\n')
 
 G_uniq.close()
 
-T_uniq = open('/scratch/kh31516/TCGA/Stomach/no_cut_micr_TCGA_Species_uniq.txt', 'w') 
-for i in TCGA_Species_uniq.keys():
+T_uniq = open('/scratch/kh31516/TCGA/Stomach/no_cut_micr_TCGA_Species_uniq.txt', 'w')
+T_uniq.write('TCGA_uniq_species'+'\t'+'TCGA_blood_ratio\n')
+
+for i in TCGA_Species_uniq_list:
     T_uniq.write(str(i)+ '\t' + str(TCGA_Species_uniq[i]))
     T_uniq.write('\n')
 
 T_uniq.close()
 
-
-total_share_species = list(TCGA_Species_overlap.keys()).sort()
         
 
     

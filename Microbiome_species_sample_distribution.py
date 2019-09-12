@@ -3,10 +3,11 @@
 
 import sys
 
-with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/total_blood_TCGA_species_fill0.txt.txt' ,'r') as f:
+with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/total_blood_TCGA_species_fill0.txt' ,'r') as f:
     total_file = f.read()
     total_name = total_file.split('\n')[:-1]
 
+## here we need to find out what are the species that share for both TCGA and Gtex
 with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/Species_shared_TCGA_Gtex.txt','r') as f:
     share_species=f.read()
     total_share_species = share_species.split('\n')[:-1]
