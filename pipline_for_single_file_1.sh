@@ -1,6 +1,6 @@
 #PBS -S /bin/bash
 #PBS -q batch
-#PBS -N 57243607-fde9-46db-817d-b6e60dfece20-TCGA
+#PBS -N ed5b5738-8484-44b0-a476-d5141cbda574-TCGA
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=150:00:00
 #PBS -l pmem=35gb 
@@ -20,24 +20,24 @@ module load BWA/0.7.17-foss-2016b
 
 # check if the file is downloaded
 cd $sequence_data
-check=$(ls | grep -i "57243607-fde9-46db-817d-b6e60dfece20")
+check=$(ls | grep -i "ed5b5738-8484-44b0-a476-d5141cbda574")
 
 if [ -z "$check" ];then
     cd $sequence_data
-    gdc-client download 57243607-fde9-46db-817d-b6e60dfece20 -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
-    Name=$(echo 57243607-fde9-46db-817d-b6e60dfece20/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
+    gdc-client download ed5b5738-8484-44b0-a476-d5141cbda574 -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
+    Name=$(echo ed5b5738-8484-44b0-a476-d5141cbda574/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
-    samtools view -b 57243607-fde9-46db-817d-b6e60dfece20/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 57243607-fde9-46db-817d-b6e60dfece20/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 57243607-fde9-46db-817d-b6e60dfece20/*.bam|awk '{print $1}' > $results/$Name/$Name-header
+    samtools view -b ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|wc -l > $results/$Name/$Name-TotalReads
+    samtools view -b -f 4 ed5b5738-8484-44b0-a476-d5141cbda574/*.bam > $results/$Name/$Name.unmapped.bam
+    samtools view ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|awk '{print $1}' > $results/$Name/$Name-header
     gzip $results/$Name/$Name-header
 else
     cd $sequence_data
-    Name=$(echo 57243607-fde9-46db-817d-b6e60dfece20/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
+    Name=$(echo ed5b5738-8484-44b0-a476-d5141cbda574/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
     mkdir $results/$Name/ 
-    samtools view -b 57243607-fde9-46db-817d-b6e60dfece20/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 57243607-fde9-46db-817d-b6e60dfece20/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 57243607-fde9-46db-817d-b6e60dfece20/*.bam|awk '{print $1}' > $results/$Name/$Name-header
+    samtools view -b ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|wc -l > $results/$Name/$Name-TotalReads
+    samtools view -b -f 4 ed5b5738-8484-44b0-a476-d5141cbda574/*.bam > $results/$Name/$Name.unmapped.bam
+    samtools view ed5b5738-8484-44b0-a476-d5141cbda574/*.bam|awk '{print $1}' > $results/$Name/$Name-header
     gzip $results/$Name/$Name-header
 fi
 
