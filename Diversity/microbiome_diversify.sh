@@ -33,9 +33,9 @@ done < /scratch/kh31516/TCGA/colon/source/total_colon_blood_cases.txt
 while read line;
 do 
     cd /scratch/kh31516/TCGA/colon/results/Blood/$line
-    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_species.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0 ${line}-TotalReads
-    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_family.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 ${line}-TotalReads
-    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_phylum.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 ${line}-TotalReads
+    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_species.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort ${line}-TotalReads
+    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_family.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum-sort ${line}-TotalReads
+    python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/diversity_phylum.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum-sort ${line}-TotalReads
 done < /scratch/kh31516/TCGA/colon/source/total_colon_blood_cases.txt
 
 #TCGA-AA-3968-10A-01D-1167-02_IlluminaHiSeq-DNASeq_whole.bam.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
