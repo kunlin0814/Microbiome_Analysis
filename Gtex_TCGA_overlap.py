@@ -25,7 +25,8 @@ for i in TCGA_total_name:
         for i in range(len(TCGA_species)):
             name=TCGA_species[i].split(" ")[0]
             value=TCGA_species[i].split(" ")[1]
-            if int(value) != 0 :
+            value = int(value)
+            if value!= 0:
                 if name in TCGA_summary.keys():
                     TCGA_summary[name] += 1
                 else:
