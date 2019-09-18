@@ -11,11 +11,11 @@
 # We can specify the thershold count for total species enrichment, 
 # if we only need to find the distribution, we can put 0. Once, we decide the threshold (FPM), we can replace it
 # we can also decide the cutoff for each species 
-# 
+# this file needs to apply both TCGA and Gtex becuase different TCGA have different overlap species with Gtex
 
 import sys
 
-with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/total_blood_TCGA_species_fill0.txt' ,'r') as f:
+with open ('/scratch/kh31516/TCGA/colon/results/Blood/total_colon_blood_species_fill0.txt' ,'r') as f:
     total_file = f.read()
     total_name = total_file.split('\n')[:-1]
 
@@ -23,7 +23,7 @@ with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/total_blood_TC
 each_file={} # here we want to see the total species enrichment in each file (FPM)
 for file_name in total_name:
     total_read_file=file_name.split('/')[7]
-    with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/results/'+total_read_file+'/'+total_read_file+'-TotalReads','r') as f1:
+    with open ('/scratch/kh31516/TCGA/colon/results/Blood/'+total_read_file+'/'+total_read_file+'-TotalReads','r') as f1:
         total_reads=int(f1.read())
         species_count = 0
         with open (file_name ,'r')as f:
@@ -34,14 +34,14 @@ for file_name in total_name:
                 each_file[each_file_name]=float(species_count*1000000/total_reads)
 
 ## here we need to find out what are the species that share for both TCGA and Gtex
-with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/source/Species_shared_TCGA_Gtex.txt','r') as f:
+with open ('/scratch/kh31516/TCGA/colon/source/Species_shared_TCGA_Gtex.txt','r') as f:
     share_species=f.read()
     total_share_species = share_species.split('\n')[:-1]
 
-threshold_count = [0] # the threshold_count here is the total species enrichment
+threshold_count = [32] # the threshold_count here is the total species enrichment
 for j in threshold_count :
     pass_files = []
-    file_output = open('/scratch/kh31516/TCGA/Stomach_original/Stomach/files_didt_pass_threshold_count_'+str(j)+'_summary.txt','w')
+    file_output = open('/scratch/kh31516/TCGA/colon/files_didt_pass_threshold_count_'+str(j)+'_summary.txt','w')
     for i in each_file.keys():
         if each_file[i] > int(j):
             pass_files.append(i)
@@ -50,11 +50,11 @@ for j in threshold_count :
             threshold = str(didt_pass)+'\t'+"don't pass the threshold:\t" + str(j)
             file_output.write(str(threshold)+'\t'+ 'the_species_enrich is:\t' + str(each_file[i]) +'\n')
     summary={}
-    file_species_summary = open('/scratch/kh31516/TCGA/Stomach_original/Stomach/TCGA_blood_allSpecies_summary.txt','w')
-    Species_With_cutoff =  open('/scratch/kh31516/TCGA/Stomach_original/Stomach/TCGA_blood_Species_with_cutoff.txt','w')            
+    file_species_summary = open('/scratch/kh31516/TCGA/colon/TCGA_blood_allSpecies_summary.txt','w')
+    Species_With_cutoff =  open('/scratch/kh31516/TCGA/colon/TCGA_blood_Species_with_cutoff.txt','w')            
     for pass_file in pass_files:
         pass_file_name = pass_file.split("HumanMicroBiome")[0].split('/')[-2]
-        with open ('/scratch/kh31516/TCGA/Stomach_original/Stomach/results/'+pass_file_name+'/'+pass_file_name+'-TotalReads','r') as f1:
+        with open ('/scratch/kh31516/TCGA/colon/results/Blood/'+pass_file_name+'/'+pass_file_name+'-TotalReads','r') as f1:
             new_total_reads=int(f1.read())
         with open (pass_file ,'r')as f:
             score ={}
