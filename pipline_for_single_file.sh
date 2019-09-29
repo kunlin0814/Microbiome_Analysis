@@ -21,7 +21,7 @@ module load SAMtools/1.6-foss-2016b
 module load BEDTools/2.26.0-foss-2016b
 module load BWA/0.7.17-foss-2016b
  
-cd $data
+cd $data/
 #gdc-client download $id -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-09-23T21_58_07.018Z.txt
 Name=$(echo $id/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
 mkdir $results/$Name/ 
