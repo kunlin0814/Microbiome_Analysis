@@ -10,8 +10,8 @@ library(Biobase)
 library(FSA)
 
 ## here we need an input file for the overlap species, but some of them are stastically significant, some of them are not
-TCGA_all_species <- read_excel('/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx',sheet = 'TCGA_species') 
-Gtex_all_species <- read_excel('/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx',sheet = 'Gtex_species')
+TCGA_all_species <- read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cutofcolon_species_summary') 
+Gtex_all_species <- read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cut_Gtex_species_summary')
 #Overlap_species  <- colnames(TCGA_all_species) 
 TCGA_all_species_list <- list()
 Gtex_all_species_list <- list()
@@ -27,7 +27,7 @@ for (i in 1:length(Overlap_species)){
 }
 
 ## to get the plot for the species distribution and for each species distribution 
-Df  <- paste("distribution", ".", "TCGA_Gtex.pdf", sep="", collapse="");
+Df  <- paste("distribution", ".", "TCGA_colon_Gtex.pdf", sep="", collapse="");
 pdf(file=Df, w=7, h=5)
 par( mar=c(2.1,4.1,2.1,1.1) )
 layout(m=matrix(1:2, 2, 1))
@@ -49,17 +49,17 @@ for (i in 2:length(Overlap_species)){
   if (p_value < 0.05){ # here the p_value is the raw pvalue of wilcox text
     significant_species <- Overlap_species[i] 
     TCGA_sign_value <- TCGA_all_species[, i]
-    TCGA_log2_value <- log2(as.numeric(TCGA_all_species[, i])+0.00001)
+    TCGA_log2_value <- log2(as.numeric(TCGA_all_species[, i]) + 0.000001)
     Gtex_sign_value <- Gtex_all_species[, i]
-    Gtex_log2_value <- log2(as.numeric(Gtex_all_species[, i] )+0.00001)
+    Gtex_log2_value <- log2(as.numeric(Gtex_all_species[, i] )+ 0.000001)
     TCGA_significant_total[[significant_species]] <- TCGA_sign_value
     log2_TCGA_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]] <- TCGA_log2_value
-    TCGA_gt_0 <- log2_TCGA_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]] >log2(0+0.00001)
-    hist_value <-log2_TCGA_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]][TCGA_gt_0]
+    TCGA_gt_0  <- log2_TCGA_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]] >log2(0+0.000001)
+    hist_value <- log2_TCGA_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]][TCGA_gt_0]
     hist(as.numeric(hist_value),breaks = 100, xlab = 'Enrichemnt',main = paste("TCGA of" ,paste(significant_species,'log2',sep="_", collapse="")))
     Gtex_significant_total[[significant_species]] <- Gtex_sign_value
     log2_Gtex_significant_total[[paste( significant_species,'log2',sep="_", collapse="")]] <- Gtex_log2_value
-    Gtex_gt_0 <- log2_Gtex_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]] >log2(0+0.00001)
+    Gtex_gt_0 <- log2_Gtex_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]] >log2(0+0.000001)
     hist_value1 <-log2_Gtex_significant_total[[paste(significant_species,'log2',sep="_", collapse="")]][Gtex_gt_0]
     hist(as.numeric(hist_value1), breaks = 100,xlab = 'Enrichemnt',main = paste("Gtex of" ,paste(significant_species,'log2',sep="_", collapse="")))
     p_value_species <- c(p_value_species, p_value )
@@ -242,4 +242,4 @@ combine <- data.frame(TCGA_Gtexoverlap=TCGA_overlap_species,
                       Gtex_sample_ratio = Gtex_pvalue_sample_amount,
                       Gtex_species_median = df$Gtex_species_median)
 combine <- combine[order(-combine$TCGA_sample_ratio),]
-write.table(combine,"/Users/kun-linho/Desktop/TCGA_Gtex_significant_species_summary.txt",row.names = F, quote= F, sep = '\t')
+write.table(combine,"/Users/kun-linho/Desktop/TCGA_colon_Gtex_significant_species_summary.txt",row.names = F, quote= F, sep = '\t')

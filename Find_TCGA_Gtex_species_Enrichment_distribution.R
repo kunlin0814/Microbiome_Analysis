@@ -2,16 +2,20 @@
 # to plot the distribution of  all species and tranfrom to log2 or not
 # the purpose of this script is try to identify of the thersheld of the species enrichemnt (from the two png file)
 # to know what enrichment value to use to identify the what is the cutoff value of the background enrichment (not random)
+library(readxl)
 
-
-Gtex_TCGA_enrichment <- read_excel("/Users/kun-linho/Desktop/08_06microbiome_Study.xlsx",sheet ='Histogram_Gtex_TCGA_blood')
+Gtex_TCGA_enrichment <- read_excel("/Users/kun-linho/Desktop/Colon.xlsx",sheet ='Total_Species_distribution')
 Gtex_totl_sepc_enrichment <- Gtex_TCGA_enrichment$Gtex_log2
-TCGA_blood_spec_enrichment <- Gtex_TCGA_enrichment$TCGA_blood_log2
+TCGA_blood_spec_enrichment_log2 <- Gtex_TCGA_enrichment$log2_total_species_enrichment
+TCGA_blood_spec_enrichment <- Gtex_TCGA_enrichment$total_species_enrichment
 png("enrichment_Gtex_total_species.png",width=6000,height=4000,res=600)
 hist(as.numeric(Gtex_totl_sepc_enrichment), breaks = 1000, xlab = 'all_species_enrichment(FPM)', main = 'log2_Gtex_all_species_enrichment(FPM)')
 dev.off()
-png("enrichment_TCGA_blood_spec_enrichment.png",width=6000,height=4000,res=600)
-hist(as.numeric(TCGA_blood_spec_enrichment), breaks = 1000, xlab = 'all_species_enrichment(FPM)', main = 'log2_TCGA_blood_all_species_enrichment(FPM)')
+png("log2_enrichment_TCGA_colon_blood_spec_enrichment.png",width=6000,height=4000,res=600)
+hist(as.numeric(TCGA_blood_spec_enrichment_log2), breaks = 1000, xlim=c(-16,20) ,xlab = 'all_species_enrichment(FPM)', main = 'log2_TCGA_colon_blood_all_species_enrichment(FPM)')
+dev.off()
+png("enrichment_TCGA_colon_blood_spec_enrichment.png",width=6000,height=4000,res=600)
+hist(as.numeric(TCGA_blood_spec_enrichment), breaks = 10000,xlab = 'all_species_enrichment(FPM)', main = 'TCGA_colon_blood_all_species_enrichment(FPM)')
 dev.off()
 
 
