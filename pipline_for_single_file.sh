@@ -1,26 +1,16 @@
 #PBS -S /bin/bash
 #PBS -q batch
-<<<<<<< HEAD
-#PBS -N 0bc29a5e-10c6-4c45-8cb6-2284ab7be445-TCGA
-=======
-#PBS -N RECTUM_2cf15e4e-c16a-4ab3-9e9c-4db6871e0c1f
->>>>>>> 4e42fa8eaf2e5117475a1a4a2da2de9ce95b065c
+#PBS -N RECTUM_4dc195af-fda9-4230-ab6a-998f1e36540b
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=60:00:00
+#PBS -l walltime=90:00:00
 #PBS -l pmem=30gb
 #PBS -M kh31516@uga.edu
 #PBS -m ae
 
-<<<<<<< HEAD
-sequence_data='/scratch/kh31516/TCGA/colon/data'
-results='/scratch/kh31516/TCGA/colon/results'
-HumanMicroBiome_source='/scratch/kh31516/TCGA/jin_source/HumanMicroBiome' 
-=======
->>>>>>> 4e42fa8eaf2e5117475a1a4a2da2de9ce95b065c
 
 data='/scratch/kh31516/TCGA/RECTUM/data'
 results='/scratch/kh31516/TCGA/RECTUM/results'
-id='2cf15e4e-c16a-4ab3-9e9c-4db6871e0c1f'
+id='4dc195af-fda9-4230-ab6a-998f1e36540b'
 source='/scratch/kh31516/source/TCGA/HumanMicroBiome'
 
 
@@ -30,31 +20,6 @@ module load gdc-client/1.3.0
 module load SAMtools/1.6-foss-2016b
 module load BEDTools/2.26.0-foss-2016b
 module load BWA/0.7.17-foss-2016b
-<<<<<<< HEAD
-
-# check if the file is downloaded
-cd $sequence_data
-check=$(ls | grep -i "0bc29a5e-10c6-4c45-8cb6-2284ab7be445")
-
-if [ -z "$check" ];then
-    cd $sequence_data
-    gdc-client download 0bc29a5e-10c6-4c45-8cb6-2284ab7be445 -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-08-23T00_36_21.797Z.txt
-    Name=$(echo 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
-    mkdir $results/$Name/ 
-    samtools view -b 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam|awk '{print $1}' > $results/$Name/$Name-header
-    gzip $results/$Name/$Name-header
-else
-    cd $sequence_data
-    Name=$(echo 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam |cut -d'/' -f2|cut -d'_' -f1-3)
-    mkdir $results/$Name/ 
-    samtools view -b 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam|wc -l > $results/$Name/$Name-TotalReads
-    samtools view -b -f 4 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam > $results/$Name/$Name.unmapped.bam
-    samtools view 0bc29a5e-10c6-4c45-8cb6-2284ab7be445/*.bam|awk '{print $1}' > $results/$Name/$Name-header
-    gzip $results/$Name/$Name-header
-fi
-=======
  
 cd $data/
 #gdc-client download $id -t /scratch/kh31516/TCGA/colon/gdc-user-token.2019-09-23T21_58_07.018Z.txt
@@ -64,7 +29,6 @@ samtools view -b $id/*.bam|wc -l > $results/$Name/$Name-TotalReads
 samtools view -b -f 4 $id/*.bam > $results/$Name/$Name.unmapped.bam
 samtools view $id/*.bam|awk '{print $1}' > $results/$Name/$Name-header
 gzip $results/$Name/$Name-header
->>>>>>> 4e42fa8eaf2e5117475a1a4a2da2de9ce95b065c
 
 #bam2fq
 cd $results/$Name
