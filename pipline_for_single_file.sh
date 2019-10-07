@@ -1,6 +1,6 @@
 #PBS -S /bin/bash
 #PBS -q batch
-#PBS -N RECTUM_4dc195af-fda9-4230-ab6a-998f1e36540b
+#PBS -N colon_fb93cdea-2ff1-454c-9fac-523a4bb11d62
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=90:00:00
 #PBS -l pmem=30gb
@@ -8,13 +8,13 @@
 #PBS -m ae
 
 
-data='/scratch/kh31516/TCGA/RECTUM/data'
-results='/scratch/kh31516/TCGA/RECTUM/results'
-id='4dc195af-fda9-4230-ab6a-998f1e36540b'
+data='/scratch/kh31516/TCGA/colon/data'
+results='/scratch/kh31516/TCGA/colon/results/tumor_adj'
+id='fb93cdea-2ff1-454c-9fac-523a4bb11d62'
 source='/scratch/kh31516/source/TCGA/HumanMicroBiome'
 
 
-cd /scratch/kh31516/TCGA/RECTUM
+cd /scratch/kh31516/TCGA/colon/
 
 module load gdc-client/1.3.0
 module load SAMtools/1.6-foss-2016b
