@@ -3,7 +3,7 @@ library(minerva)
 conn <- file("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/blood",open="r")
 linn <-readLines(conn)
 result<-cbind("Phylum", "MIC", "spearman","pVspearman","pearson","pVpearson","Case")
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/blood.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/CORR_blood.result")
 for (i in 1:length(linn)){
 	Phylum=unlist(strsplit(linn[i], "[.]"))[1]
 	dat <- read.table(paste("/scratch/kh31516/TCGA/Stomach/results/CORR/",linn[i],sep=""), header=T)
@@ -16,7 +16,7 @@ for (i in 1:length(linn)){
 	Pp<-cor.test(x,y,method="pearson")$p.value
 	count<-max(colSums( dat[,c(2,3)]!= 0))
 	result<-cbind(Phylum,M,S,Sp,P,Pp,count)
-	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/blood.result")
+	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/CORR_blood.result")
 }
 
 close(conn)
@@ -25,7 +25,7 @@ close(conn)
 conn <- file("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/adjacent",open="r")
 linn <-readLines(conn)
 result<-cbind("Phylum", "MIC", "spearman","pVspearman","pearson","pVpearson","Case")
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/adjacent.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/CORR_adjacent.result")
 for (i in 1:length(linn)){
 	Phylum=unlist(strsplit(linn[i], "[.]"))[1]
 	dat <- read.table(paste("/scratch/kh31516/TCGA/Stomach/results/CORR/",linn[i],sep=""), header=T)
@@ -38,7 +38,7 @@ for (i in 1:length(linn)){
 	Pp<-cor.test(x,y,method="pearson")$p.value
 	count<-max(colSums( dat[,c(2,3)]!= 0))
 	result<-cbind(Phylum,M,S,Sp,P,Pp,count)
-	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/adjacent.result")
+	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum/CORR_adjacent.result")
 }
 
 close(conn)
