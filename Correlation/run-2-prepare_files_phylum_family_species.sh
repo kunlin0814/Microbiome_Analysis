@@ -6,14 +6,14 @@
 
 
 ##################################################################################
-## In this script, we need to find the Uniq species, family and phylum list first
+## In this script, we use the Uniq species, family and phylum list first
 ## This script is to count how many reads in each species, phylum and familys in each sample.
 ## It will create ex: Helicobacter_pylori and Helicobacter_pylori-sort.
 
 ## 
 ## CorrFile.py will create the files telling the reads of each species(family) in each TCGA Blood samples(10), and in each adjacent noraml samples comparing with tumor samples to prepare the correlation test
 ## It will create ex: Helicobacter_pylori.blood, Helicobacter_pylor.adjacent from CorrFile.py
-## It will create ex: adjacent blood outfiles contains the infomration of all species . Ex: Phylum/Acidobacteria.adjacent
+## It will create ex: adjacent blood output files contains the infomration of all species . Ex: Phylum/Acidobacteria.adjacent
 
 
 mkdir -p /scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species
