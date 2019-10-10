@@ -5,6 +5,9 @@ Created on Thu Jun 13 14:05:02 2019
 
 @author: kun-linho
 """
+# here the input is the family-summary-sort-fill0
+# the script will create the enrichment of each samples 
+# and then use shell script to get total_sample enrichment
 
 import sys
 import math
@@ -32,18 +35,10 @@ for i in score.values():
 
 family_enrichment=(sum/total_read)*1000000
 ni=0
-"""
-Shannon=0
-denominator=sum*(sum-1)
-for i in score.values():
-    ni+=int(i)*(int(i)-1)
-    Shannon+=(int(i)/sum)*math.log2(int(i)/sum)
-Shannon = -1 * Shannon
-#Simpson=1-(ni/denominator)
-"""
-log2_family_enrichment = math.log2(float(family_enrichment)+0.00001)
 
-output=open('diversity_calculation_family' + '.txt' ,'w')
+log2_family_enrichment = math.log2(float(family_enrichment)+(1/len(total)))
+
+output=open('familyEnrichment_calculation' + '.txt' ,'w')
 #output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_family_count'+'\t'+'family_enrichment'+'\t'+'log2_family_enrichment'+'\n')
 output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(family_enrichment)+'\t'+str(log2_family_enrichment)+'\n')
 output.close()

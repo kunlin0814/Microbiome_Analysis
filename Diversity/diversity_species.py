@@ -27,24 +27,20 @@ sum=0
 for i in score.values():
     sum+=int(i)
 
-total_species_enrichment=(sum/total_read)*1000000
+species_enrichment=(sum/total_read)*1000000
 ni=0
-"""
+
 Shannon=0
 denominator=sum*(sum-1)
 for i in score.values():
     ni+=int(i)*(int(i)-1)
     Shannon+=(int(i)/sum)*math.log2(int(i)/sum)
 Shannon = -1 * Shannon
-"""
 #Simpson=1-(ni/denominator)
 
-#specific_species_value=int(score['Pseudomonas_fluorescens'])
-#specific_species_enrichment= float(specific_species_value*1000000/total_read)
+log2_total_species_enrichment = math.log2(float(species_enrichment)+(1/len(total)))
 
-log2_total_species_enrichment = math.log2(float(total_species_enrichment)+0.00001)
-
-output=open('diversity_calculation_species' + '.txt' ,'w')
-#output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_species_counts'+'\t'+'total_species_enrichment'+'\t'+'log2_total_species_enrichment'+'\n')
-output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(total_species_enrichment)+'\t'+ str(log2_total_species_enrichment)+'\n')
+output=open('speciesDiversity_calculation' + '.txt' ,'w')
+#output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_species_counts'+'\t'+'species_enrichment'+'\t'+'Shannon_diversity'+'\n')
+output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(species_enrichment)+'\t'+str(Shannon)+'\n')
 output.close()
