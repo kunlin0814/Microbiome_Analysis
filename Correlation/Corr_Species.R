@@ -1,14 +1,14 @@
 library(minerva) ## library for the MIC
 
-conn <- file("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/blood",open="r") ## file names of all samples 
+conn <- file("/scratch/kh31516/TCGA/RECTUM/results/CORR/Species/blood",open="r") ## file names of all samples 
 linn <-readLines(conn)
 result<-cbind("Species", "MIC", "spearman","pVspearman","pearson","pVpearson","Case") # header
 
-## output file name
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/CORR_blood.result")
+## output file name and location
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/RECTUM/results/CORR/CORR_blood_species.result")
 for (i in 1:length(linn)){ ## read each file
   Species=unlist(strsplit(linn[i], "[.]"))[1]
-  dat <- read.table(paste("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/",linn[i],sep=""), header=T)
+  dat <- read.table(paste("/scratch/kh31516/TCGA/RECTUM/results/CORR/",linn[i],sep=""), header=T)
   x <- dat[,2]
   y <- dat[,3]
   M<-mine(x, y)$MIC  ## here is we do the Maximal information coefficient 
@@ -18,19 +18,19 @@ for (i in 1:length(linn)){ ## read each file
   Pp<-cor.test(x,y,method="pearson")$p.value
   count<-max(colSums( dat[,c(2,3)]!= 0)) ## the number of the cases for this species
   result<-cbind(Species,M,S,Sp,P,Pp,count)
-  write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/CORR_blood.result")
+  write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/RECTUM/results/CORR/CORR_blood_species.result")
 }
 
 close(conn)
 
 
-conn <- file("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/adjacent",open="r")
+conn <- file("/scratch/kh31516/TCGA/RECTUM/results/CORR/Species/adjacent",open="r")
 linn <-readLines(conn)
 result<-cbind("Species", "MIC", "spearman","pVspearman","pearson","pVpearson","Case")
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/CORR_adjacent.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/RECTUM/results/CORR/CORR_adjacent_species.result")
 for (i in 1:length(linn)){
 	Species=unlist(strsplit(linn[i], "[.]"))[1]
-	dat <- read.table(paste("/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/",linn[i],sep=""), header=T)
+	dat <- read.table(paste("/scratch/kh31516/TCGA/RECTUM/results/CORR/",linn[i],sep=""), header=T)
 	x <- dat[,2]
 	y <- dat[,3]
 	M<-mine(x, y)$MIC
@@ -40,7 +40,7 @@ for (i in 1:length(linn)){
 	Pp<-cor.test(x,y,method="pearson")$p.value
 	count<-max(colSums( dat[,c(2,3)]!= 0))
 	result<-cbind(Species,M,S,Sp,P,Pp,count)
-	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species/CORR_adjacent.result")
+	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/RECTUM/results/CORR/CORR_adjacent_species.result")
 }
 
 close(conn)

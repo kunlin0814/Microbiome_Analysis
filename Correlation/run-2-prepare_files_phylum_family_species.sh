@@ -16,11 +16,18 @@
 ## It will create ex: adjacent blood output files contains the infomration of all species . Ex: Phylum/Acidobacteria.adjacent
 
 
-mkdir -p /scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Species
-mkdir -p /scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Phylum
-mkdir -p /scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/Family
 
-cd /scratch/kh31516/TCGA/Stomach_original/Stomach/CORR/
+
+
+## We also need to find the CorrFile.py
+
+cd /scratch/kh31516/TCGA/RECTUM/results/CORR/
+
+mkdir -p /scratch/kh31516/TCGA/RECTUM/results/CORR/Species
+mkdir -p /scratch/kh31516/TCGA/RECTUM/results/CORR/Phylum
+mkdir -p /scratch/kh31516/TCGA/RECTUM/results/CORR/Family
+
+
 module load Python/2.7.14-foss-2018a
 while read line
 	do
@@ -31,8 +38,10 @@ while read line
 				echo "$case" "$count" >> Species/$line
 			done
 		cat Species/$line|awk '{if(NF!=1)print $0}'|sort > Species/$line-sort
-		python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/CorrFile.py Species/$line-sort Species/$line
-	done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/speciesList.txt
+		## We also need to find the CorrFile.py
+		python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Species/$line-sort Species/$line
+		## for each type of cancer, we need to change Uniq species, family and phylum
+	done < /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Species.txt 
 
 ls Species/*.blood > Species/blood
 ls Species/*.adjacent > Species/adjacent
@@ -46,8 +55,9 @@ do
 			echo $case $count >> Phylum/$line
 		done
 	cat Phylum/$line|awk '{if(NF!=1)print $0}'|sort > Phylum/$line-sort
-	python /scratch/kh31516/TCGA/Stomach/scripts/CorrFile.py Phylum/$line-sort Phylum/$line
-done< /scratch/kh31516/TCGA/Stomach_original/Stomach/source/phylumList.txt
+	python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Phylum/$line-sort Phylum/$line
+	## for each type of cancer, we need to change Uniq species, family and phylum
+done< /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Phylum.txt 
 ls Phylum/*.blood > Phylum/blood
 ls Phylum/*.adjacent > Phylum/adjacent
 
@@ -61,8 +71,8 @@ do
 			echo $case $count >> Family/$line
 		done
 	cat Family/$line|awk '{if(NF!=1)print $0}'|sort >Family/$line-sort
-	python /scratch/kh31516/TCGA/Stomach/scripts/CorrFile.py Family/$line-sort Family/$line
-done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/familyList.txt
+	python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Family/$line-sort Family/$line
+done < /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Family.txt 
 
 ls Family/*.blood > Family/blood
 ls Family/*.adjacent > Family/adjacent
