@@ -11,19 +11,20 @@
 
 while read line; 
 do
-	cd /scratch/kh31516/TCGA/RECTUM/results/
-	cd /scratch/kh31516/TCGA/RECTUM/results/$line/HumanMicroBiome
+	cd /scratch/kh31516/TCGA/colon/results/
+	cd /scratch/kh31516/TCGA/colon/results/$line/HumanMicroBiome
 	cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
 	cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
 	cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_Uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
 	case=$(echo $line |cut -d'-' -f1-3) # the result would be TCGA-QG-A5Z2, so we can compare cases
-	mkdir -p /scratch/kh31516/TCGA/RECTUM/results/CORR/$case/
-	cp $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0 /scratch/kh31516/TCGA/RECTUM/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-	cp $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 /scratch/kh31516/TCGA/RECTUM/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
-	cp $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 /scratch/kh31516/TCGA/RECTUM/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
+	mkdir -p /scratch/kh31516/TCGA/colon/results/CORR/$case/
+	#rm -r /scratch/kh31516/TCGA/colon/results/CORR/$case/
+	cp $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
+	cp $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
+	cp $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
 	
-done < /scratch/kh31516/TCGA/RECTUM/source/Total_RECTUM_cases.txt
+done < /scratch/kh31516/TCGA/colon/source/total_colon_file.txt
 
