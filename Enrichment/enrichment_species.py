@@ -44,7 +44,7 @@ Shannon = -1 * Shannon
 
 log2_total_species_enrichment = math.log2(float(total_species_enrichment)+0.00001)
 
-output=open('diversity_calculation_species' + '.txt' ,'w')
+output=open('enrichment' + '.txt' ,'w')
 #output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_species_counts'+'\t'+'total_species_enrichment'+'\t'+'log2_total_species_enrichment'+'\n')
 output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(total_species_enrichment)+'\t'+ str(log2_total_species_enrichment)+'\n')
 output.close()

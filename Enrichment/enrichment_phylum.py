@@ -35,7 +35,7 @@ Shannon = -1 * Shannon
 log2_phylum_enrichment = math.log2(float(phylum_enrichment)+0.00001)
 #Simpson=1-(ni/denominator)
 #fuso_value=int(score['Fusobacteria'])
-output=open('diversity_calculation_phylum' + '.txt' ,'w')
+output=open('enrichment_phylum' + '.txt' ,'w')
 #output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_phylum_counts'+'\t'+'phylum_enrichment'+'\t'+'log2_phylum_enrichment'+'\n')
 output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(phylum_enrichment)+'\t'+str(log2_phylum_enrichment)+'\n')
 output.close()

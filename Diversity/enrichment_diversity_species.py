@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
-# here the input is the family-summary-sort-fill0
+# here the input is the species-summary-sort-fill0
 # the script will create the enrichment and diversity of each samples 
 # and then use shell script to get total_sample enrichment and diversity
 
 import sys
 import math
-file_name=sys.argv[1]
-total_reads_file=sys.argv[2]
-
+file_name=sys.argv[1] # here the input is the species-summary-sort-fill0
+total_reads_file=sys.argv[2] # total read file for each sample
 with open (total_reads_file, 'r')as f1:
     file1=f1.read()
     
@@ -26,12 +24,12 @@ for i in range(len(total)):
     value=total[i].split()[1]
     score[name]=value
 sum=0
-
 for i in score.values():
     sum+=int(i)
 
-family_enrichment=(sum/total_read)*1000000
+species_enrichment=(sum/total_read)*1000000
 ni=0
+
 Shannon=0
 denominator=sum*(sum-1)
 for i in score.values():
@@ -40,9 +38,9 @@ for i in score.values():
 Shannon = -1 * Shannon
 #Simpson=1-(ni/denominator)
 
+log2_total_species_enrichment = math.log2(float(species_enrichment)+(1/len(total)))
 
-
-output=open('familyDiversity_calculation' + '.txt' ,'w')
-output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_family_count'+'\t'+'family_enrichment'+'\t'+'Shannon'+'\n')
-output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(family_enrichment)+'\t'+str(Shannon)+'\n')
+output=open('speciesEnrichmentDiversity_calculation' + '.txt' ,'w')
+#output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_species_counts'+'\t'+'species_enrichment'+'\t'+'log2_Species_enrichment\t'+'Shannon_diversity'+'\n')
+output.write(total_reads_file+'\t'+str(total_read)+'\t'+str(sum)+'\t'+str(species_enrichment)+'\t'+str(log2_total_species_enrichment)+'\t'+str(Shannon)+'\n')
 output.close()

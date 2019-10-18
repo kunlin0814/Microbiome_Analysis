@@ -4,18 +4,29 @@
 # to know what enrichment value to use to identify the what is the cutoff value of the background enrichment (not random)
 library(readxl)
 
-Gtex_TCGA_enrichment <- read_excel("/Users/kun-linho/Desktop/Colon.xlsx",sheet ='Total_Species_distribution')
-Gtex_totl_sepc_enrichment <- Gtex_TCGA_enrichment$Gtex_log2
-TCGA_blood_spec_enrichment_log2 <- Gtex_TCGA_enrichment$log2_total_species_enrichment
-TCGA_blood_spec_enrichment <- Gtex_TCGA_enrichment$total_species_enrichment
+TCGA_enrichment <- read.table("/Volumes/Research_Data/Microbiome_analysis/RECTUM/Enrichment_diversity/speciesEnrichmentDiversity_sum.txt",
+                              header = T, sep = '\t')
+#read_excel("/Users/kun-linho/Desktop/Colon.xlsx",sheet ='Total_Species_distribution')
+
+Gtex_enrichment <- read.table("/Volumes/Research_Data/Microbiome_analysis/Gtex/Enrichment_Diversity/speciesEnrichmentDiversity_sum.txt",
+                              header = T, sep = '\t')
+  #Gtex_TCGA_enrichment$Gtex_log2
+TCGA_blood_spec_enrichment_log2 <- TCGA_enrichment$log2_speces_enrichment
+TCGA_blood_spec_enrichment <- TCGA_enrichment$species_enrichment
+Gtex_totl_sepc_enrichment_log2 <- Gtex_enrichment$log2_speces_enrichment
+Gtex_totl_sepc_enrichment <- Gtex_enrichment$species_enrichment
+
 png("enrichment_Gtex_total_species.png",width=6000,height=4000,res=600)
-hist(as.numeric(Gtex_totl_sepc_enrichment), breaks = 1000, xlab = 'all_species_enrichment(FPM)', main = 'log2_Gtex_all_species_enrichment(FPM)')
+hist(as.numeric(Gtex_totl_sepc_enrichment), breaks = 1000, xlab = 'all_species_enrichment(FPM)', main = 'Gtex_all_species_enrichment(FPM)')
+dev.off()
+png("enrichment_Gtex_total_species_log2.png",width=6000,height=4000,res=600)
+hist(as.numeric(Gtex_totl_sepc_enrichment_log2), breaks = 1000, xlim = c(0,15),xlab = 'all_species_enrichment(FPM)', main = 'log2_Gtex_all_species_enrichment(FPM)')
 dev.off()
 png("log2_enrichment_TCGA_colon_blood_spec_enrichment.png",width=6000,height=4000,res=600)
-hist(as.numeric(TCGA_blood_spec_enrichment_log2), breaks = 1000, xlim=c(-16,20) ,xlab = 'all_species_enrichment(FPM)', main = 'log2_TCGA_colon_blood_all_species_enrichment(FPM)')
+hist(as.numeric(TCGA_blood_spec_enrichment_log2), breaks = 1000,xlim = c(5,15),xlab = 'all_species_enrichment(FPM)', main = 'log2_TCGA_RECTUM_blood_all_species_enrichment(FPM)')
 dev.off()
 png("enrichment_TCGA_colon_blood_spec_enrichment.png",width=6000,height=4000,res=600)
-hist(as.numeric(TCGA_blood_spec_enrichment), breaks = 10000,xlab = 'all_species_enrichment(FPM)', main = 'TCGA_colon_blood_all_species_enrichment(FPM)')
+hist(as.numeric(TCGA_blood_spec_enrichment), breaks = 10000,xlab = 'all_species_enrichment(FPM)', main = 'TCGA_RECTUM_blood_all_species_enrichment(FPM)')
 dev.off()
 
 
