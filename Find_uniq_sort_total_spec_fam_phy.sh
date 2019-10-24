@@ -8,19 +8,19 @@
 #while read line;
 #do
 #cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/WGS_random.sample_wtih_run.txt | grep -i $line
-#done < /Volumes/TCGA_CRC/TCGA/CRC/finish/Gtex_samples.txt
-cd /Volumes/TCGA_CRC/TCGA/RECTUM
+#done < /scratch/kh31516/TCGA/colon/CRC/finish/Gtex_samples.txt
+cd /scratch/kh31516/TCGA/colon/results
 
 while read line ;
 do
-    cd /Volumes/TCGA_CRC/TCGA/RECTUM/$line
-    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum >>/Volumes/TCGA_CRC/TCGA/total_species.txt
-    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum >>/Volumes/TCGA_CRC/TCGA/total_phylum.txt
-    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum >>/Volumes/TCGA_CRC/TCGA/total_family.txt
+    cd /scratch/kh31516/TCGA/colon/results/${line}
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum >>/scratch/kh31516/TCGA/colon/total_species.txt
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum >>/scratch/kh31516/TCGA/colon/total_phylum.txt
+    cat HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum >>/scratch/kh31516/TCGA/colon/total_family.txt
 
-done < /Volumes/TCGA_CRC/TCGA/RECTUM/total_rectum_cases.txt
+done < /scratch/kh31516/TCGA/colon/source/total_colon_file.txt
 
-cat /Volumes/TCGA_CRC/TCGA/total_species.txt | cut -d " " -f1 | sort | uniq > /Volumes/TCGA_CRC/TCGA/Total_RECTUM_Uniq_Species.txt
-cat /Volumes/TCGA_CRC/TCGA/total_phylum.txt  | cut -d " " -f1 | sort | uniq > /Volumes/TCGA_CRC/TCGA/Total_RECTUM_Uniq_Phylum.txt
-cat /Volumes/TCGA_CRC/TCGA/total_family.txt  | cut -d " " -f1 | sort | uniq > /Volumes/TCGA_CRC/TCGA/Total_RECTUM_Uniq_Family.txt
+cat /scratch/kh31516/TCGA/colon/total_species.txt | cut -d " " -f1 | sort | uniq > /scratch/kh31516/TCGA/colon/Total_colon_Uniq_Species.txt
+cat /scratch/kh31516/TCGA/colon/total_phylum.txt  | cut -d " " -f1 | sort | uniq > /scratch/kh31516/TCGA/colon/Total_colon_Uniq_Phylum.txt
+cat /scratch/kh31516/TCGA/colon/total_family.txt  | cut -d " " -f1 | sort | uniq > /scratch/kh31516/TCGA/colon/Total_colon_Uniq_Family.txt
 

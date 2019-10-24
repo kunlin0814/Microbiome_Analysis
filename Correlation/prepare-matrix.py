@@ -38,5 +38,5 @@ for j in range(len(rf)):
 		else:
 			gene=gene_2;
 			log=0;
-	print >>outfile, gene,log;
+	print(gene,log, sep = " ", file = outfile );
 outfile.close();

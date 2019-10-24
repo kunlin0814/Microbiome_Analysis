@@ -3,6 +3,7 @@
 #PBS -N summary
 #PBS -l nodes=1:ppn=1:AMD
 #PBS -l walltime=48:00:00
+#PBS -l mem=10gb
 
 
 ##################################################################################
@@ -13,9 +14,9 @@ while read line;
 do
 	cd /scratch/kh31516/TCGA/colon/results/
 	cd /scratch/kh31516/TCGA/colon/results/$line/HumanMicroBiome
-	cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
+	#cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
+	#cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
+	#cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
 	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
 	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
 	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
@@ -26,5 +27,5 @@ do
 	cp $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
 	cp $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
 	
-done < /scratch/kh31516/TCGA/colon/source/total_colon_file.txt
+done < /scratch/kh31516/TCGA/colon/source/total_TCGA_colon_cases.txt
 
