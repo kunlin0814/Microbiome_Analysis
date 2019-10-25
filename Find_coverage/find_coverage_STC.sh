@@ -21,7 +21,8 @@ do
     total=$(cat ${line}-TotalReads | bc)
     coverage=$((length*total/3000000000))
     if [ $coverage -ge $cut_off ]; then
-        printf  "%s\t%d\t%d\t%.4f\n" "${line}" "$length" "$total" "$coverage" >> /scratch/kh31516/TCGA/Stomach_original/Stomach/gt_cutoffseqDepthSummary.txt
         cp -r /scratch/kh31516/TCGA/Stomach_original/Stomach/results/$line /scratch/kh31516/TCGA/Stomach_original/Stomach/gt_cutoff
+        printf  "%s\t%d\t%d\t%.4f\n" "${line}" "$length" "$total" "$coverage" >> /scratch/kh31516/TCGA/Stomach_original/Stomach/gt_cutoffseqDepthSummary.txt
+        
     fi
 done < /scratch/kh31516/TCGA/Stomach_original/Stomach/source/TCGA_STC_cases_inclus.txt
