@@ -25,4 +25,4 @@ do
         mv /scratch/kh31516/TCGA/colon/results/$line /scratch/kh31516/TCGA/CRC/gt_cutoff
     fi
     
-done < /scratch/kh31516/TCGA/colon/source/total_tumor_adjCases.txt
+done < /scratch/kh31516/TCGA/colon/source/total_TCGA_colon_cases.txt
