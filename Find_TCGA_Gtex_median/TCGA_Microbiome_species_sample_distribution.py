@@ -17,7 +17,7 @@ import sys
 
 threshold_count = [1024] # the threshold_count here is the total species enrichment, here is the place we need to change
 
-with open ('/scratch/kh31516/TCGA/RECTUM/Total_blood_fill0.txt' ,'r') as f:
+with open ('/scratch/kh31516/TCGA/CRC/source/gt_cut_off_total_blood_CRC.txt' ,'r') as f:
     total_file = f.read()
     total_name = total_file.split('\n')[:-1]
 
@@ -25,7 +25,7 @@ with open ('/scratch/kh31516/TCGA/RECTUM/Total_blood_fill0.txt' ,'r') as f:
 each_file={} # here we want to see the total species enrichment in each file (FPM)
 for file_name in total_name:
     total_read_file=file_name.split('/')[6]
-    with open ('/scratch/kh31516/TCGA/RECTUM/results/'+total_read_file+'/'+total_read_file+'-TotalReads','r') as f1:
+    with open ('/scratch/kh31516/TCGA/CRC/gt_cutoff/'+total_read_file+'/'+total_read_file+'-TotalReads','r') as f1:
         total_reads=int(f1.read())
         species_count = 0
         with open (file_name ,'r')as f:
@@ -37,7 +37,7 @@ for file_name in total_name:
 
 ## here we need to find out what are the species that share for both TCGA and Gtex
 total_share_species =[]
-with open ('/scratch/kh31516/TCGA/RECTUM/no_cut_micr_Gtex_Species_overlap.txt','r') as f:
+with open ('/scratch/kh31516/TCGA/CRC/source/no_cut_micr_Gtex_Species_overlap.txt','r') as f:
     share_species=f.read()
     file_share_species = share_species.split('\n')[:-1]
 
@@ -49,7 +49,7 @@ total_share_species = sorted(total_share_species)
 
 for j in threshold_count :
     pass_files = []
-    file_output = open('/scratch/kh31516/TCGA/RECTUM/files_didt_pass_threshold_count_'+str(j)+'_summary.txt','w')
+    file_output = open('/scratch/kh31516/TCGA/CRC/source/files_didt_pass_threshold_count_'+str(j)+'_summary.txt','w')
     for i in each_file.keys():
         if each_file[i] > float(j):
             pass_files.append(i)
@@ -58,8 +58,8 @@ for j in threshold_count :
             threshold = str(didt_pass)+'\t'+"don't pass the threshold:\t" + str(j)
             file_output.write(str(threshold)+'\t'+ 'the_species_enrich is:\t' + str(each_file[i]) +'\n')
     summary={}
-    file_species_summary = open('/scratch/kh31516/TCGA/RECTUM/TCGA_blood_allSpecies_summary.txt','w')
-    Species_With_cutoff =  open('/scratch/kh31516/TCGA/RECTUM/TCGA_blood_Species_with_cutoff.txt','w')
+    file_species_summary = open('/scratch/kh31516/TCGA/CRC/source/TCGA_blood_allSpecies_summary.txt','w')
+    Species_With_cutoff =  open('/scratch/kh31516/TCGA/CRC/source/TCGA_blood_Species_with_cutoff.txt','w')
     Species_With_cutoff.write('file_Name\t')
     file_species_summary.write('file_Name\t')
     overlap={}
@@ -72,7 +72,7 @@ for j in threshold_count :
     species_cut_off = float(0) # Here we can specify the cutoff for each species, if we don't have, we can use 0
     for pass_file in pass_files:
         pass_file_name = pass_file.split("HumanMicroBiome")[0].split('/')[-2]
-        with open ('/scratch/kh31516/TCGA/RECTUM/results/'+pass_file_name+'/'+pass_file_name+'-TotalReads','r') as f1:
+        with open ('/scratch/kh31516/TCGA/CRC/gt_cutoff/'+pass_file_name+'/'+pass_file_name+'-TotalReads','r') as f1:
             new_total_reads=int(f1.read())
         with open (pass_file ,'r')as f:
             score ={}

@@ -10,10 +10,10 @@ library(Biobase)
 library(FSA)
 
 ## here we need an input file for the overlap species, but some of them are stastically significant, some of them are not
-TCGA_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/RECTUM/TCGA_Gtex_overlap/TCGA_blood_allSpecies_summary.txt",
+TCGA_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Median/TCGA_blood_allSpecies_summary.txt",
                                header= T, stringsAsFactors = F)
 #read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cutofcolon_species_summary') 
-Gtex_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/Gtex/GTex_blood_analysis_enrichment/Gtex_RECTUM/Gtex_RECTUM_blood_allSpecies_summary.txt",
+Gtex_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/Gtex/Gtex_gt_cutoff/Gtex_blood_allSpecies_summary.txt",
                                header =T, stringsAsFactors = F)
 #read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cut_Gtex_species_summary')
 #Overlap_species  <- colnames(TCGA_all_species) 
@@ -45,7 +45,7 @@ for (i in 1:length(Overlap_species)){
 }
 
 ## to get the plot for the species distribution and for each species distribution 
-Df  <- paste("distribution", ".", "TCGA_RECTUM_Gtex.pdf", sep="", collapse="");
+Df  <- paste("distribution", ".", "TCGA_CRC_Gtex.pdf", sep="", collapse="");
 pdf(file=Df, w=7, h=5)
 par( mar=c(2.1,4.1,2.1,1.1) )
 layout(m=matrix(1:2, 2, 1))
@@ -260,4 +260,4 @@ combine <- data.frame(TCGA_Gtexoverlap=TCGA_overlap_species,
                       Gtex_sample_ratio = Gtex_pvalue_sample_amount,
                       Gtex_species_median = df$Gtex_species_median)
 combine <- combine[order(-combine$TCGA_sample_ratio),]
-write.table(combine,"/Users/kun-linho/Desktop/TCGA_Rectum_Gtex_significant_species_summary.txt",row.names = F, quote= F, sep = '\t')
+write.table(combine,"/Users/kun-linho/TCGA_CRC_Gtex_significant_species_summary.txt",row.names = F, quote= F, sep = '\t')

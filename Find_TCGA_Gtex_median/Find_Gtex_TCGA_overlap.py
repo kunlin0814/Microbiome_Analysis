@@ -4,17 +4,17 @@
 # we don't apply the total reads cutoff to find the overlap species with Gtex
 import sys
 # take the file names as an input ex: sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-with open ('/scratch/kh31516/TCGA/RECTUM/Total_blood_fill0.txt' ,'r') as f: 
+with open ('/scratch/kh31516/TCGA/CRC/source/gt_cut_off_total_blood_CRC.txt' ,'r') as f: 
     TCGA_total_file=f.read()
     TCGA_total_name=TCGA_total_file.split('\n')[:-1]
 
-with open ('/scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/total_gtex_file_species_sort-fill0.txt','r') as f1:
+with open ('/scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cutoff_blood_gtex_fill0.txt','r') as f1:
     Gtex_total_file = f1.read()
     Gtex_total_name = Gtex_total_file.split('\n')[:-1]
        
-TCGA_output = open('/scratch/kh31516/TCGA/RECTUM/TCGA_species_summary' + '.txt' ,'w')
-# Gtex_file_name=['/scratch/kh31516/TCGA/RECTUM/SAMN04595834.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0','/scratch/kh31516/TCGA/RECTUM/SAMN04595942.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0','/scratch/kh31516/TCGA/RECTUM/SAMN04596006.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0']
-GTex_output = open('/scratch/kh31516/TCGA/RECTUM/Gtex_species_summary' + '.txt' ,'w')
+TCGA_output = open('/scratch/kh31516/TCGA/CRC/source/TCGA_species_summary' + '.txt' ,'w')
+# Gtex_file_name=['/scratch/kh31516/TCGA/CRC/source/SAMN04595834.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0','/scratch/kh31516/TCGA/CRC/source/SAMN04595942.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0','/scratch/kh31516/TCGA/CRC/source/SAMN04596006.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0']
+GTex_output = open('/scratch/kh31516/TCGA/CRC/source/Gtex_species_summary' + '.txt' ,'w')
 
 TCGA_summary={}
 for i in TCGA_total_name:
@@ -70,7 +70,7 @@ Gtex_Species_uniq = {}
 TCGA_Species_uniq = {}
 
             
-with open ('/scratch/kh31516/TCGA/RECTUM/Gtex_species_summary.txt' , 'r' )as f:
+with open ('/scratch/kh31516/TCGA/CRC/source/Gtex_species_summary.txt' , 'r' )as f:
     Gtex_file = f.read()
     Gtex = Gtex_file.split('\n')[:-1]
     
@@ -81,7 +81,7 @@ for i in range(len(Gtex)) :
     
 Gtex_Species_total = sorted(list(Gtex_Species_summary.keys()))
 
-with open ('/scratch/kh31516/TCGA/RECTUM/TCGA_species_summary.txt', 'r' )as f1:
+with open ('/scratch/kh31516/TCGA/CRC/source/TCGA_species_summary.txt', 'r' )as f1:
     TCGA_file = f1.read()
     TCGA = TCGA_file.split('\n')[:-1]
 
@@ -110,7 +110,7 @@ for i in TCGA_Species_total:
 TCGA_Species_overlap_list = sorted(list(TCGA_Species_overlap.keys()))
 TCGA_Species_uniq_list = sorted(list(TCGA_Species_uniq.keys()))
 
-g_overlap = open ('/scratch/kh31516/TCGA/RECTUM/no_cut_micr_Gtex_Species_overlap.txt', 'w')
+g_overlap = open ('/scratch/kh31516/TCGA/CRC/source/no_cut_micr_Gtex_Species_overlap.txt', 'w')
 g_overlap.write('Gtex_overlap_species'+'\t'+'Gtex_blood_ratio')
 g_overlap.write('\n')
 
@@ -120,7 +120,7 @@ for i in Gtex_Species_overlap_list:
    
 g_overlap.close()
 
-T_overlap = open ('/scratch/kh31516/TCGA/RECTUM/no_cut_micr_TCGA_Species_overlap.txt', 'w')
+T_overlap = open ('/scratch/kh31516/TCGA/CRC/source/no_cut_micr_TCGA_Species_overlap.txt', 'w')
 T_overlap.write('TCGA_overlap_species'+'\t'+ 'TCGA_blood_ratio')
 T_overlap.write('\n')
 
@@ -130,7 +130,7 @@ for i in TCGA_Species_overlap_list:
 
 T_overlap.close()
 
-G_uniq = open ('/scratch/kh31516/TCGA/RECTUM/no_cut_micr_Gtex_Species_uniq.txt', 'w')
+G_uniq = open ('/scratch/kh31516/TCGA/CRC/source/no_cut_micr_Gtex_Species_uniq.txt', 'w')
 G_uniq.write('Gtex_uniq_species'+'\t'+ 'Gtex_blood_ratio')
 G_uniq.write('\n')
 
@@ -140,7 +140,7 @@ for i in Gtex_Species_uniq_list:
 
 G_uniq.close()
 
-T_uniq = open('/scratch/kh31516/TCGA/RECTUM/no_cut_micr_TCGA_Species_uniq.txt', 'w')
+T_uniq = open('/scratch/kh31516/TCGA/CRC/source/no_cut_micr_TCGA_Species_uniq.txt', 'w')
 T_uniq.write('TCGA_uniq_species'+'\t'+'TCGA_blood_ratio')
 T_uniq.write('\n')
 for i in TCGA_Species_uniq_list:

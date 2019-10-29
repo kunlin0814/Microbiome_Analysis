@@ -11,10 +11,6 @@ module load Python/3.7.0-foss-2018a
 # the python script micro_phylum_enrich.py give you the enrichemnt of specific species
 while read line;
 do 
-	cd /scratch/kh31516/TCGA/colon/results/$line/HumanMicroBiome
-	cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
     cd /scratch/kh31516/TCGA/colon/results/Blood/$line
     python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Diversity/micro_phylum_enrich.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 ${line}-TotalReads
     python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Diversity/micro_family_enrich.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 ${line}-TotalReads
@@ -36,25 +32,10 @@ done < /scratch/kh31516/TCGA/colon/source/total_colon_blood_cases.txt
 ## the output for each folder is 'diversity_calculation_species(family, phylum).txt
 while read line;
 do 
-    cd /scratch/kh31516/TCGA/colon/results/$line/HumanMicroBiome
-	cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
-	cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
-    cd /scratch/kh31516/TCGA/colon/results/$line
     cd /scratch/kh31516/TCGA/colon/results/Blood/$line
     python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Diversity/diversity_species.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort ${line}-TotalReads
     python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Diversity/diversity_family.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-FamilySum-sort ${line}-TotalReads
     python3.7 /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Diversity/diversity_phylum.py HumanMicroBiome/${line}.sam-readsID-PhylumFamilySpecies-PhylumSum-sort ${line}-TotalReads
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/colon/source/Total_colon_Uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
-	case=$(echo $line |cut -d'-' -f1-3) # the result would be TCGA-QG-A5Z2, so we can compare cases
-	mkdir -p /scratch/kh31516/TCGA/colon/results/CORR/$case/
-	#rm -r /scratch/kh31516/TCGA/colon/results/CORR/$case/
-	cp $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-	cp $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
-	cp $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0 /scratch/kh31516/TCGA/colon/results/CORR/$case/$line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
-    
 done < /scratch/kh31516/TCGA/colon/source/TCGA_colon_blood_avail_cases.txt
 
 #TCGA-AA-3968-10A-01D-1167-02_IlluminaHiSeq-DNASeq_whole.bam.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
