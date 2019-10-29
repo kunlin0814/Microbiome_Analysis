@@ -15,9 +15,9 @@ cut_off=10
 printf "%s\t%s\t%s\t%sf\n" "fileName" "seq_Len" "totalReads" "seqDepth" >> /scratch/kh31516/TCGA/colon/cutoff_colon_CoverageSummary.txt
 while read line;
 do 
-    cd /scratch/kh31516/TCGA/colon/results/tumor_adj/$line
-    samtools view ${line}.unmapped_sorted.bam | head -10 | cut -f10  > /scratch/kh31516/TCGA/colon/results/$line/length.txt
-    length=$(python3 /scratch/kh31516/TCGA/Stomach_original/Stomach/find_bam_seq_len.py /scratch/kh31516/TCGA/colon/results/tumor_adj/$ine/length.txt | bc)
+    cd /scratch/kh31516/TCGA/colon/results/$line
+    samtools view ${line}.unmapped_sorted.bam | head -10 | cut -f10  > /scratch/kh31516/TCGA/colon/results/${line}/length.txt
+    length=$(python3 /scratch/kh31516/TCGA/Stomach_original/Stomach/find_bam_seq_len.py /scratch/kh31516/TCGA/colon/results/$line/length.txt | bc)
     total=$(cat ${line}-TotalReads | bc)
     coverage=$((length*total/3000000000))
     if [ $coverage -ge $cut_off ]; then
