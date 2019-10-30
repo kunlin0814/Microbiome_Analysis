@@ -138,10 +138,10 @@ for (i in 1:length(linn)){
 	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_adjacent_species.result")
 }
 
-close(conn_blood_phylum)
-close(conn_adj_phylum)
-close(conn_family_blood)
-close(conn_family_adj)
-close(conn_speceis_blood)
-close(conn_species_adj)
+#close(conn_blood_phylum)
+#close(conn_adj_phylum)
+#close(conn_family_blood)
+#close(conn_family_adj)
+#close(conn_speceis_blood)
+#close(conn_species_adj)
 

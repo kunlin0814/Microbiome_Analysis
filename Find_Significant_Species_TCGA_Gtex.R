@@ -1,7 +1,7 @@
 ## this script takes each sample of all species reads( species overlap between TCGA and GTex)
 # and then do the statistic analysis to find the significant species, and then adjust p_value
 # you can also apply the sample ratio cutoff for Gtex or TCGA, if not, then the sample ratio cutoff is 0
-# the final output is the significant species with p value and sample ratio 
+# the final output is the significant species with p value and sample ratio
 # and the median of each species
 
 library(dplyr)
@@ -12,17 +12,17 @@ library(FSA)
 ## here we need an input file for the overlap species, but some of them are stastically significant, some of them are not
 TCGA_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Median/TCGA_blood_allSpecies_summary.txt",
                                header= T, stringsAsFactors = F)
-#read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cutofcolon_species_summary') 
+#read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cutofcolon_species_summary')
 Gtex_all_species <- read.table("/Volumes/Research_Data/Microbiome_analysis/Gtex/Gtex_gt_cutoff/Gtex_blood_allSpecies_summary.txt",
                                header =T, stringsAsFactors = F)
 #read_excel('/Users/kun-linho/Desktop/Colon.xlsx',sheet = 'with_cut_Gtex_species_summary')
-#Overlap_species  <- colnames(TCGA_all_species) 
+#Overlap_species  <- colnames(TCGA_all_species)
 TCGA_all_species_list <- list()
 Gtex_all_species_list <- list()
 
 TCGA_all_species <- as.matrix(TCGA_all_species)
 Gtex_all_species <- as.matrix(Gtex_all_species)
-Overlap_species  <- colnames(TCGA_all_species) 
+Overlap_species  <- colnames(TCGA_all_species)
 colNumber <- ncol(TCGA_all_species)
 both_empty_column <- c()
 for (i in 2:colNumber) {
@@ -35,7 +35,7 @@ for (i in 2:colNumber) {
 TCGA_all_species <- TCGA_all_species[,-both_empty_column]
 Gtex_all_species <- Gtex_all_species[,-both_empty_column]
 
-Overlap_species  <- colnames(TCGA_all_species) 
+Overlap_species  <- colnames(TCGA_all_species)
 
 
 #Overlap_species1 <- colnames(Gtex_all_species)
@@ -44,7 +44,7 @@ for (i in 1:length(Overlap_species)){
   Gtex_all_species_list[[Overlap_species[i]]] = Gtex_all_species[,i]
 }
 
-## to get the plot for the species distribution and for each species distribution 
+## to get the plot for the species distribution and for each species distribution
 Df  <- paste("distribution", ".", "TCGA_CRC_Gtex.pdf", sep="", collapse="");
 pdf(file=Df, w=7, h=5)
 par( mar=c(2.1,4.1,2.1,1.1) )
@@ -65,7 +65,7 @@ for (i in 2:length(Overlap_species)){
   wilcox <- wilcox.test(as.numeric(TCGA_species_value),as.numeric(Gtex_species_value), alt="two.sided",paired = F, correct=T)
   p_value=wilcox$p.value
   if (p_value < 0.05 ){ # here the p_value is the raw pvalue of wilcox text
-    significant_species <- Overlap_species[i] 
+    significant_species <- Overlap_species[i]
     TCGA_sign_value <- TCGA_all_species[, i]
     TCGA_log2_value <- log2(as.numeric(TCGA_all_species[, i]) + 0.000001)
     Gtex_sign_value <- Gtex_all_species[, i]
@@ -82,7 +82,7 @@ for (i in 2:length(Overlap_species)){
     hist(as.numeric(hist_value1), breaks = 100,xlab = 'Enrichemnt',main = paste("Gtex of" ,paste(significant_species,'log2',sep="_", collapse="")))
     p_value_species <- c(p_value_species, p_value )
     species <- c(species, Overlap_species[i] )
-    
+
   }
 }
 
@@ -125,7 +125,7 @@ Gtex_list_dataframe <- as.data.frame(Gtex_significant_Species_list)
 #colnames(TCGA_list_dataframe) <- species_pvalue$Species
 #colnames(Gtex_list_dataframe) <- species_pvalue$Species
 
-## here we need significant species read as input for each sample ##  
+## here we need significant species read as input for each sample ##
 #Gtex_sig_data <- read_excel("/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx", sheet = 'Gtex_species_significant')
 #TCGA_sig_data <- read_excel("/Users/kun-linho/Desktop/Species_TCGA_Gtex_distribution.xlsx", sheet = 'TCGA_species_significant')
 col_names <-colnames(TCGA_list_dataframe)
@@ -154,7 +154,7 @@ species_name <- c()
 # }
 # TCGA_List <- TCGA_each_species_median
 # names(TCGA_List) <- species_name
-# 
+#
 # Gtex_List <- Gtex_each_species_median
 # names(Gtex_List) <- species_name
 
@@ -162,7 +162,7 @@ species_name <- c()
 for (i in 1:length(col_names)){
   Gtex_sample_number_for_eachspecies <- 0
   for (j in 1:Gtex_sample_amount){
-    Gtex_species_enrichment <- as.numeric(Gtex_sig_data[j,i])  
+    Gtex_species_enrichment <- as.numeric(Gtex_sig_data[j,i])
     if (Gtex_species_enrichment >0) { # if each sample reads for each species gt 0
       Gtex_sample_number_for_eachspecies <- Gtex_sample_number_for_eachspecies + 1
     }
@@ -173,14 +173,14 @@ for (i in 1:length(col_names)){
     Gtex_median_value <- median(as.numeric(Gtex_sig_data[ ,i] ))
     Gtex_each_species_median <- c(Gtex_each_species_median, Gtex_median_value)
   }
-  
+
 }
 
 
 for (i in 1:length(col_names)){
   TCGA_sample_number_for_eachspecies <- 0
   for (j in 1:TCGA_sample_amount){
-    TCGA_species_enrichment <- as.numeric(TCGA_sig_data[j,i]) 
+    TCGA_species_enrichment <- as.numeric(TCGA_sig_data[j,i])
     if (TCGA_species_enrichment > 0){
       TCGA_sample_number_for_eachspecies <- TCGA_sample_number_for_eachspecies + 1
     }
@@ -190,7 +190,7 @@ for (i in 1:length(col_names)){
     TCGA_sample_number <- c(TCGA_sample_number ,TCGA_sample_number_for_eachspecies/TCGA_sample_amount)
     TCGA_median_value <- median(as.numeric(TCGA_sig_data[ ,i] ))
     TCGA_each_species_median <- c(TCGA_each_species_median,TCGA_median_value )
-    
+
   }
 }
 
@@ -202,7 +202,7 @@ new_Gtex_sample_number <- c(Gtex_sample_number, rep(NA,n - length(Gtex_sample_nu
 new_Gtex_each_species_median = c(Gtex_each_species_median, rep(NA,n - length(Gtex_each_species_median)))
 new_TCGA_each_species_median = c(TCGA_each_species_median, rep(NA,n - length(TCGA_each_species_median)))
 ## need to adjust the order of p values
-df <- data.frame(TCGA_species=new_TCGA_species_gtcutoff, TCGA_samplegtcutoff_ratio =new_TCGA_sample_number, TCGA_species_median=new_TCGA_each_species_median,  
+df <- data.frame(TCGA_species=new_TCGA_species_gtcutoff, TCGA_samplegtcutoff_ratio =new_TCGA_sample_number, TCGA_species_median=new_TCGA_each_species_median,
                  Gtex_species=new_Gtex_species_gtcutoff, Gtex_samplegtcutoff_ratio=new_Gtex_sample_number,Gtex_species_median=new_Gtex_each_species_median)
 TCGA_species <- df$TCGA_species
 TCGA_sample_ratio <- df$TCGA_samplegtcutoff_ratio
