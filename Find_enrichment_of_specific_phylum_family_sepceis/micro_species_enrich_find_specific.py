@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# input 1: file name of .sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
+# input 2: file name of *-TotalReads
+
 import sys
 file_name=sys.argv[1]
 total_reads_file=sys.argv[2]
@@ -18,7 +21,7 @@ sum=0
 for i in score.values():
     sum+=int(i)
 
-
+## species enrichment
 fuso_value=int(score['Fusobacterium_ulcerans'])
 
 with open(total_reads_file,'r') as f:
