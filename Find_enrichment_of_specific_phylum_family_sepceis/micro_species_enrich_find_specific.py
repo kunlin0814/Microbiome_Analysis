@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# input 1: file name of .sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
-# input 2: file name of *-TotalReads
-
 import sys
 file_name=sys.argv[1]
 total_reads_file=sys.argv[2]
+candidate_species = sys.argv[3]
+#species_result = sys.argv[4]
+
 with open (file_name, 'r')as f:
     file=f.read()
 
@@ -21,17 +21,17 @@ sum=0
 for i in score.values():
     sum+=int(i)
 
-## species enrichment
-fuso_value=int(score['Fusobacterium_ulcerans'])
+
+species_value=int(score[candidate_species])
 
 with open(total_reads_file,'r') as f:
     file1=f.read()
 total_read=int(file1)
 
-ratio=fuso_value/total_read
+ratio=float((species_value/total_read)*1000000)
 
-output=open('fuso_enrich_species' + '.txt' ,'w')
-output.write(total_reads_file+'\t'+'Fusobacterium_ulcerans'+'\n')
-output.write(total_reads_file+'\t'+str(fuso_value)+'\n')
+output=open(candidate_species + '_value.txt' ,'w')
+#output.write('file_name'+'\t'+ candidate_species +'\n')
+output.write(total_reads_file.split('-')[0]+'\t'+str(ratio)+'\n')
 output.close()
 
