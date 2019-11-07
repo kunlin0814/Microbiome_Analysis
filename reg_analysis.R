@@ -13,7 +13,7 @@ data <- read.table(input_file,
                    stringsAsFactors = F)
 
 file_name <- input_file
-Species <- unlist(strsplit(file_name,split='/'))[9]
+Species <- unlist(strsplit(file_name,split='/'))[8]
 x <-  data$X01
 y <-  data$X10
 S<-cor(x,y, method="spearman")
@@ -29,11 +29,13 @@ ggplot(data, aes(x=X01, y=X10)) +
   geom_point(size=2)+
   xlab("Tumor samples") +
   ylab("Blood_Samples") +
-  annotate(geom="text", x=5, y=max(y), label=paste("Spearman",S,sep = " = "), color="blue")+
-  annotate(geom="text", x=5, y=max(y)-1, label=paste("S-pvalue",Sp,sep = " = "), color="red")+
-  annotate(geom="text", x=5, y=max(y)-2, label=paste("Pearson",P,sep = " = "), color="blue")+
-annotate(geom="text", x=5, y=max(y)-3, label=paste("P-pvalue",Pp,sep = " = "), color="red")+
+  annotate(geom="text", x=0.25*max(x), y=max(y), label=paste("Spearman",S,sep = " = "), color="blue")+
+  annotate(geom="text", x=0.25*max(x), y=max(y)-(0.3*max(y)*0.3), label=paste("S-pvalue",Sp,sep = " = "), color="red")+
+  annotate(geom="text", x=0.25*max(x), y=max(y)-(0.3*max(y)*0.6), label=paste("Pearson",P,sep = " = "), color="blue")+
+  annotate(geom="text", x=0.25*max(x), y=max(y)-(0.3*max(y)*0.9), label=paste("P-pvalue",Pp,sep = " = "), color="red")+
   theme(axis.text=element_text(size=14),
     axis.title=element_text(size=14,face="bold"),
     plot.title = element_text(color = "black", size = 20, face = "bold"))
 dev.off()
+
+#-(0.3*max(y)0.6)
