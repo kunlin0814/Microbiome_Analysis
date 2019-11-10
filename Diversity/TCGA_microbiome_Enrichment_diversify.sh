@@ -13,9 +13,9 @@ module load Python/3.7.0-foss-2018a
 ## the output for each folder is 'diversity_calculation_species(family, phylum).txt
 ## here we need to find the blood file name
 
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_phylum_counts" "phylum_enrichment" "log2_phylum_enrichment" "phylumShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/phylumEnrichmentDiversity_sum.txt
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_family_counts" "family_enrichment" "log2_family_enrichment" "familyShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/familyEnrichmentDiversity_sum.txt
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_species_counts" "species_enrichment" "log2_speces_enrichment" "speciesShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/speciesEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_phylum_counts" "phylum_enrichment" "log2_phylum_enrichment" "phylumShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_phylumEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_family_counts" "family_enrichment" "log2_family_enrichment" "familyShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_familyEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_species_counts" "species_enrichment" "log2_speces_enrichment" "speciesShannon_diversity" >> /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_speciesEnrichmentDiversity_sum.txt
 
 while read line;
 do 
@@ -26,9 +26,9 @@ do
     
     # cat the summary of each sample to total samples
     
-    cat phylumEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/TCGA/CRC/gt_cutoff/phylumEnrichmentDiversity_sum.txt
-    cat familyEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/TCGA/CRC/gt_cutoff/familyEnrichmentDiversity_sum.txt
-    cat speciesEnrichmentDiversity_calculation.txt >> /scratch/kh31516/TCGA/CRC/gt_cutoff/speciesEnrichmentDiversity_sum.txt
+    cat phylumEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_phylumEnrichmentDiversity_sum.txt
+    cat familyEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_familyEnrichmentDiversity_sum.txt
+    cat speciesEnrichmentDiversity_calculation.txt >> /scratch/kh31516/TCGA/CRC/gt_cutoff/new_blood_speciesEnrichmentDiversity_sum.txt
 
 done < /scratch/kh31516/TCGA/CRC/source/Blood_total_CRC_casesgtcutoff.txt
 

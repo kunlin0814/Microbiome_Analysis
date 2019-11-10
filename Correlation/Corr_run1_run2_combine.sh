@@ -17,9 +17,9 @@ do
 	cat $line.sam-readsID-PhylumFamilySpecies-SpeciesSum|sort > $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort
 	cat $line.sam-readsID-PhylumFamilySpecies-PhylumSum|sort > $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort
 	cat $line.sam-readsID-PhylumFamilySpecies-FamilySum|sort > $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
-	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Species.txt $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort $line.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Phylum.txt $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort $line.sam-readsID-PhylumFamilySpecies-PhylumSum-sort-fill0
+	python /scratch/kh31516/TCGA/colon/Scripts_for_data_anlaysis/Microbiome_Analysis/Correlation/prepare-matrix.py /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Family.txt $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort $line.sam-readsID-PhylumFamilySpecies-FamilySum-sort-fill0
 	case=$(echo $line |cut -d'-' -f1-3) # the result would be TCGA-QG-A5Z2, so we can compare cases
 	mkdir -p /scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/$case/
 	#rm -r /scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/$case/
@@ -64,7 +64,7 @@ while read line
 		## We also need to find the CorrFile.py
 		python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Species/$line-sort Species/$line
 		## for each type of cancer, we need to change Uniq species, family and phylum
-	done < /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Species.txt
+	done < /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Species.txt
 
 ls Species/*.blood > Species/blood
 ls Species/*.adjacent > Species/adjacent
@@ -80,7 +80,7 @@ do
 	cat Phylum/$line|awk '{if(NF!=1)print $0}'|sort > Phylum/$line-sort
 	python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Phylum/$line-sort Phylum/$line
 	## for each type of cancer, we need to change Uniq species, family and phylum
-done< /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Phylum.txt 
+done< /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Phylum.txt 
 
 ls Phylum/*.blood > Phylum/blood
 ls Phylum/*.adjacent > Phylum/adjacent
@@ -96,7 +96,7 @@ do
 		done
 	cat Family/$line|awk '{if(NF!=1)print $0}'|sort >Family/$line-sort
 	python /scratch/kh31516/TCGA/Stomach_original/Stomach/scripts/TCGA/Correlation/CorrFile.py Family/$line-sort Family/$line
-done < /scratch/kh31516/TCGA/CRC/source/Total_CRC_Uniq_Family.txt
+done < /scratch/kh31516/TCGA/CRC/source/Total_GTEX_CRC_uniq_Family.txt
 
 ls Family/*.blood > Family/blood
 ls Family/*.adjacent > Family/adjacent

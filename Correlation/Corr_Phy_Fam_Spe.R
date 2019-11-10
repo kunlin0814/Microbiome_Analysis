@@ -4,7 +4,7 @@ library(minerva)
 conn_blood_phylum <- file("/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/Phylum/blood",open="r")
 linn <-readLines(conn_blood_phylum)
 result<-cbind("Phylum", "MIC", "spearman","pVspearman","pearson","pVpearson","Case")
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_phylum.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_Phylum.result")
 for (i in 1:length(linn)){
 	Phylum=unlist(strsplit(linn[i], "[.]"))[1]
 	dat <- read.table(paste("/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/",linn[i],sep=""), header=T)
@@ -17,7 +17,7 @@ for (i in 1:length(linn)){
 	Pp<-cor.test(x,y,method="pearson")$p.value
 	count<-max(colSums( dat[,c(2,3)]!= 0))
 	result<-cbind(Phylum,M,S,Sp,P,Pp,count)
-	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_phylum.result")
+	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_Phylum.result")
 }
 
 
@@ -99,7 +99,7 @@ linn <-readLines(conn_speceis_blood)
 result<-cbind("Species", "MIC", "spearman","pVspearman","pearson","pVpearson","Case") # header
 
 ## output file name and location
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_species.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_Species.result")
 for (i in 1:length(linn)){ ## read each file
   Species=unlist(strsplit(linn[i], "[.]"))[1]
   dat <- read.table(paste("/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/",linn[i],sep=""), header=T)
@@ -112,7 +112,7 @@ for (i in 1:length(linn)){ ## read each file
   Pp<-cor.test(x,y,method="pearson")$p.value
   count<-max(colSums( dat[,c(2,3)]!= 0)) ## the number of the cases for this species
   result<-cbind(Species,M,S,Sp,P,Pp,count)
-  write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_species.result")
+  write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_blood_Species.result")
 }
 
 
@@ -122,7 +122,7 @@ for (i in 1:length(linn)){ ## read each file
 conn_species_adj <- file("/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/Species/adjacent",open="r")
 linn <-readLines(conn_species_adj)
 result<-cbind("Species", "MIC", "spearman","pVspearman","pearson","pVpearson","Case")
-write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_adjacent_species.result")
+write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_adjacent_Species.result")
 for (i in 1:length(linn)){
 	Species=unlist(strsplit(linn[i], "[.]"))[1]
 	dat <- read.table(paste("/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/",linn[i],sep=""), header=T)
@@ -135,7 +135,7 @@ for (i in 1:length(linn)){
 	Pp<-cor.test(x,y,method="pearson")$p.value
 	count<-max(colSums( dat[,c(2,3)]!= 0))
 	result<-cbind(Species,M,S,Sp,P,Pp,count)
-	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_adjacent_species.result")
+	write.table(result,append = TRUE,col.names=F,row.names=F,sep="\t",quote=F,file="/scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/CORR_adjacent_Species.result")
 }
 
 #close(conn_blood_phylum)

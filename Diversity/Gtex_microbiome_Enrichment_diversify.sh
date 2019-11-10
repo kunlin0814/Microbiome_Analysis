@@ -13,9 +13,9 @@ module load Python/3.7.0-foss-2018a
 ## the output for each folder is 'diversity_calculation_species(family, phylum).txt
 ## here we need to find the blood file name
 
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_phylum_counts" "phylum_enrichment" "log2_phylum_enrichment" "phylumShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/phylumEnrichmentDiversity_sum.txt
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_family_counts" "family_enrichment" "log2_family_enrichment" "familyShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/familyEnrichmentDiversity_sum.txt
-printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_species_counts" "species_enrichment" "log2_speces_enrichment" "speciesShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/speciesEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_phylum_counts" "phylum_enrichment" "log2_phylum_enrichment" "phylumShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_phylumEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_family_counts" "family_enrichment" "log2_family_enrichment" "familyShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_familyEnrichmentDiversity_sum.txt
+printf  "%s\t%s\t%s\t%s\t%s\t%s\n" "file_name" "total_reads" "total_species_counts" "species_enrichment" "log2_speces_enrichment" "speciesShannon_diversity" >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_speciesEnrichmentDiversity_sum.txt
 
 while read line;
 do 
@@ -26,11 +26,11 @@ do
     
     # cat the summary of each sample to total samples
     
-    cat phylumEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/phylumEnrichmentDiversity_sum.txt
-    cat familyEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/familyEnrichmentDiversity_sum.txt
-    cat speciesEnrichmentDiversity_calculation.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/speciesEnrichmentDiversity_sum.txt
+    cat phylumEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_phylumEnrichmentDiversity_sum.txt
+    cat familyEnrichmentDiversity_calculation.txt >>  /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_familyEnrichmentDiversity_sum.txt
+    cat speciesEnrichmentDiversity_calculation.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/Gtex_blood_speciesEnrichmentDiversity_sum.txt
 
-done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cutoff_gtex.txt
+done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cut_off_gtex.txt
 
 #TCGA-AA-3968-10A-01D-1167-02_IlluminaHiSeq-DNASeq_whole.bam.sam-readsID-PhylumFamilySpecies-SpeciesSum-sort-fill0
 # cat the summary of each sample to total samples

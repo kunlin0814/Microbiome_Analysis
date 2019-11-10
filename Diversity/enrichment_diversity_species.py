@@ -38,7 +38,7 @@ for i in score.values():
 Shannon = -1 * Shannon
 #Simpson=1-(ni/denominator)
 
-log2_total_species_enrichment = math.log2(float(species_enrichment)+(1/len(total)))
+log2_total_species_enrichment = math.log2(float(species_enrichment)+0.00001)
 
 output=open('speciesEnrichmentDiversity_calculation' + '.txt' ,'w')
 #output.write(total_reads_file+'\t'+'total_read'+'\t'+'total_species_counts'+'\t'+'species_enrichment'+'\t'+'log2_Species_enrichment\t'+'Shannon_diversity'+'\n')

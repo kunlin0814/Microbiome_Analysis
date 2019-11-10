@@ -2,37 +2,48 @@
 # to plot the distribution of  all species and tranfrom to log2 or not
 # the purpose of this script is try to identify of the thersheld of the species enrichemnt (from the two png file)
 # to know what enrichment value to use to identify the what is the cutoff value of the background enrichment (not random)
-library(readxl)
+#library(readxl)
 
-TCGA_enrichment <- read.table("/Volumes/Research_Data/Microbiome_analysis/CRC_combine/Distribution/Blood_CRCspeciesEnrichmentDiversity_sum.txt",
-                              header = T, sep = '\t')
+
+# /Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Enrichment_Diversity/TCGA_blood_CRC_familyEnrichmentDiversity_sum.txt
+# /Volumes/Research_Data/Microbiome_analysis/Gtex/Gtex_gt_cutoff/Enrichment/Gtex_blood_familyEnrichmentDiversity_sum.txt
+
+#datatype <-c('TCGA','Gtex')
+
+categories <- c('species','phylum','family')
+for (category in categories) {
+TCGA_enrichment <- read.table(paste("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Enrichment_Diversity/TCGA_blood_CRC_",category,"EnrichmentDiversity_sum.txt",sep =""),
+                              header = T, sep = '\t',
+                              stringsAsFactors = F)
 #read_excel("/Users/kun-linho/Desktop/Colon.xlsx",sheet ='Total_Species_distribution')
-
-Gtex_enrichment <- read.table("/Volumes/Research_Data/Microbiome_analysis/Gtex/gt_cutoff/Gtex_blood_speciesEnrichmentDiversity_sum.txt",
-                              header = T, sep = '\t')
-
-
-
-
+TCGA_enrichment <- as.matrix(TCGA_enrichment)
+Gtex_enrichment <- read.table(paste("/Volumes/Research_Data/Microbiome_analysis/Gtex/Gtex_gt_cutoff/Enrichment/Gtex_blood_",category,"EnrichmentDiversity_sum.txt",sep=""),
+                              header = T, sep = '\t',
+                              stringsAsFactors = F)
+Gtex_enrichment <- as.matrix(Gtex_enrichment)
 #Gtex_TCGA_enrichment$Gtex_log2
-TCGA_blood_spec_enrichment_log2 <- TCGA_enrichment$log2_speces_enrichment
-TCGA_blood_spec_enrichment <- TCGA_enrichment$species_enrichment
-Gtex_totl_sepc_enrichment_log2 <- Gtex_enrichment$log2_speces_enrichment
-Gtex_totl_sepc_enrichment <- Gtex_enrichment$species_enrichment
+TCGA_blood_enrichment_log2 <- TCGA_enrichment[,5]
+TCGA_blood_enrichment <- TCGA_enrichment[,4]
+Gtex_blood_enrichment_log2 <- Gtex_enrichment[,5]
+Gtex_blood_enrichment <- Gtex_enrichment[,4]
 
-png("enrichment_Gtex_total_species.png",width=6000,height=4000,res=600)
-hist(as.numeric(Gtex_totl_sepc_enrichment), breaks = 1000, xlab = 'all_species_enrichment(FPM)', main = 'Gtex_all_species_enrichment(FPM)')
-dev.off()
-png("log2_enrichment_Gtex_blood_total_species.png",width=6000,height=4000,res=600)
-hist(as.numeric(Gtex_totl_sepc_enrichment_log2), breaks = 1000, xlim = c(0,15),xlab = 'all_species_enrichment(FPM)', main = 'log2_Gtex_all_species_enrichment(FPM)')
-dev.off()
-png("log2_enrichment_TCGA_CRC_blood_spec_enrichment.png",width=6000,height=4000,res=600)
-hist(as.numeric(TCGA_blood_spec_enrichment_log2), breaks = 1000,xlim = c(5,15),xlab = 'all_species_enrichment(FPM)', main = 'log2_TCGA_CRC_blood_all_species_enrichment(FPM)')
-dev.off()
-png("enrichment_TCGA_CRC_spec_enrichment.png",width=6000,height=4000,res=600)
-hist(as.numeric(TCGA_blood_spec_enrichment), breaks = 10000,xlab = 'all_species_enrichment(FPM)', main = 'TCGA_CRC_blood_all_species_enrichment(FPM)')
-dev.off()
+#a <- c(min(TCGA_blood_enrichment_log2),a)
 
+png(paste("enrichment_Gtex_total_",category,".png",sep=""),width=6000,height=4000,res=600)
+hist(as.numeric(Gtex_blood_enrichment), breaks = 1000, xlab = "Gtex_blood_enrichment(FPM)", main = paste("Total",category,"_Gtex_blood_enrichment(FPM)",sep = ""))
+dev.off()
+png(paste("log2_enrichment_Gtex_total_",category,".png",sep=""),width=6000,height=4000,res=600)
+hist(as.numeric(Gtex_blood_enrichment_log2), breaks = 1000, xlim= c(-5,18),xlab = "Gtex_blood_enrichment(FPM)", main = paste("log2_Total",category,"_Gtex_blood_enrichment(FPM)",sep = ""))
+abline(v=3.17, col="purple")
+dev.off()
+png(paste("log2_enrichment_TCGA_CRC_blood_",category,"_enrichment.png",sep=""),width=6000,height=4000,res=600)
+hist(as.numeric(TCGA_blood_enrichment_log2), breaks = 1000, xlim= c(-5,18),xlab = "TCGA_CRC_blood_enrichment(FPM)", main = paste("log2_Total",category,"_TCGA_CRC_blood_enrichment(FPM)",sep = ""))
+abline(v=10, col="purple")
+dev.off()
+png(paste("enrichment_TCGA_CRC_blood_",category,"_enrichment.png",sep=""),width=6000,height=4000,res=600)
+hist(as.numeric(TCGA_blood_enrichment), breaks = 10000, xlab = "TCGA_CRC_blood_enrichment(FPM)", main = paste("Total",category,"_TCGA_CRC_blood_enrichment(FPM)",sep = ""))
+dev.off()
+    }
 
 
 
