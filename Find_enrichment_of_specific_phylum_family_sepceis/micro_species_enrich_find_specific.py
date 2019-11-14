@@ -30,8 +30,9 @@ total_read=int(file1)
 
 ratio=float((species_value/total_read)*1000000)
 
-output=open(candidate_species + '_value.txt' ,'w')
+output=open(candidate_species + '_Species_value.txt' ,'w')
 #output.write('file_name'+'\t'+ candidate_species +'\n')
-output.write(total_reads_file.split('-TotalReads')[0]+'\t'+str(ratio)+'\n')
+output_name = total_reads_file.split('-TotalReads')[0]
+output.write(output_name+'\t'+str(ratio)+'\n')
 output.close()
 

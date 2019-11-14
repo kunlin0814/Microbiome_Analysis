@@ -9,20 +9,20 @@ It will create an ouput file that shows the speceis that has greater median diff
 """
 
 categories = ['Species','Family','Phylum']
-
+# /Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/New_Median/Median_difference_result/TCGA_CRC_Gtex_significant_Family_summary.txt
 for category in categories :
     ## input file 1, which is the file contains the median difference information ##
-    with open ("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/TCGA_CRC_Gtex_significant_"+category+"_summary.txt",'r')as f:
+    with open ("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/New_Median/Median_difference_result/TCGA_CRC_Gtex_significant_"+category+"_summary.txt",'r')as f:
         file = f.read()
         median = file.split('\n')[:-1]
-
+    ## /Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/CORR/CORR_blood_Phylum.result
     ## input file 2, which is the file contains the correlation information ##
     with open("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/CORR/CORR_blood_"+category+".result", 'r')as f:
         file1 = f.read()
         corr = file1.split('\n')[:-1]
         
         
-    overlap = open ("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/"+category+"_median_corr_overlap_withcutoff.txt",'w')    
+    overlap = open ("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Overlap_Median_CORR/"+category+"_median_corr_overlap_withcutoff.txt",'w')    
     
     overlap.write('TCGA_Gtexoverlap\tTCGA_overlap_pvalue\tTCGA_sample_ratio\tTCGA_'+category+'_median\tGtex_sample_ratio\tGtex_'+category+'_median\tMedian_diff\t'+category+'\tMIC\tspearman\tpVspearman\tpearson\tpVpearson\tCase\n')
     
