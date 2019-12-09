@@ -7,11 +7,11 @@ library(ggplot2)
   #'Aspergillus_fumigatus.blood'
   #args[1]
 #output_file <- args[2]
-
+categories <- c("Species","Family","Phylum")
 for (category in categories) {
 Df  <- paste("CRC", ".", "Candidate",category,".pdf", sep="", collapse="");
 pdf(file=Df, w=16, h=9)
-categories <- c("Species","Family","Phylum")
+
 candidate_microbes <- read.table(paste("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Candidate_species_family_phylum_data/CRC_candidate_",category,".txt",sep=""))
 #file_name <- input_file
 candidates <- candidate_microbes$V1
