@@ -7,6 +7,10 @@
 #PBS -M kh31516@uga.edu
 #PBS -m ae
 
+
+## This script takes candidate Phylum, Family, and Species as source files and the 
+## python script will calculate the enrichment of the candidate microbes from all of the samples
+
 cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/
 ml Python/3.7.0-foss-2018a
 
