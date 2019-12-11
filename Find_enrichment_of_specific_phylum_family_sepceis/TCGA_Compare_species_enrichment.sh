@@ -15,7 +15,7 @@ ml Python/3.7.0-foss-2018a
 ### Tumor Samples ####
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_species_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Species_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -26,7 +26,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
-        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_species_${line}.txt
+        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Species_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Tumor_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
@@ -34,7 +34,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_family_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Family_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -45,7 +45,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_family_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Family_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Tumor_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
@@ -53,7 +53,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_phylum_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Phylum_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -64,7 +64,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_phylum_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Tumor_candidate_Phylum_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Tumor_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
@@ -73,7 +73,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_species_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Species_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -84,7 +84,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
-        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_species_${line}.txt
+        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Species_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Blood_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
@@ -92,7 +92,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_family_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Family_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -103,7 +103,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_family_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Family_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Blood_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
@@ -111,7 +111,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_phylum_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Phylum_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -122,7 +122,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_phylum_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Blood_candidate_Phylum_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Blood_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
@@ -131,7 +131,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
 ### Adjacent Noraml Samples ####
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_species_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Species_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -142,7 +142,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
-        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_species_${line}.txt
+        cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Species_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Adj_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
@@ -150,7 +150,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Speceis.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_family_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Family_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -161,7 +161,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_family_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Family_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Adj_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
@@ -169,7 +169,7 @@ done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Family.txt
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_phylum_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Phylum_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}
@@ -180,7 +180,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt
-    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_phylum_${line}.txt
+    cat /scratch/kh31516/TCGA/CRC/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/TCGA/CRC/enrichment_analysis/TCGA_Adj_candidate_Phylum_${line}.txt
 
     done < /scratch/kh31516/TCGA/CRC/source/TCGA_CRC_Adj_cases.txt
 done < /scratch/kh31516/TCGA/CRC/source/CRC_candidate_Phylum.txt

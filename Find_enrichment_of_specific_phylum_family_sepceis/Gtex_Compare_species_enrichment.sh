@@ -16,7 +16,7 @@ ml Python/3.7.0-foss-2018a
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_species_Gtex_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Species_Gtex_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}
@@ -27,7 +27,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Speceis.txt
-        cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_species_Gtex_${line}.txt
+        cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Species_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Species_Gtex_${line}.txt
 
     done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cut_off_gtex.txt
 done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Speceis.txt
@@ -35,7 +35,7 @@ done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_family_Gtex_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Family_Gtex_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}
@@ -46,7 +46,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Family.txt
-    cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_family_Gtex_${line}.txt
+    cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Family_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Family_Gtex_${line}.txt
 
     done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cut_off_gtex.txt
 done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Family.txt
@@ -54,7 +54,7 @@ done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_
 
 while read line ;
 do
-    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_phylum_Gtex_${line}.txt
+    printf  "%s\t%s\n" "file_name" "$line"  >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Phylum_Gtex_${line}.txt
     while read line1 ;
     do
         cd /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}
@@ -65,7 +65,7 @@ do
             ${line1}-TotalReads \
             ${line2}
         done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Phylum.txt
-    cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_phylum_Gtex_${line}.txt
+    cat /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/${line1}/${line}_Phylum_value.txt >> /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/results/gt_cutoff/total_candidate_Phylum_Gtex_${line}.txt
 
     done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/gt_cut_off_gtex.txt
 done < /scratch/kh31516/Gtex/Blood/WGS_normal_blood_result/source/CRC_candidate_Phylum.txt

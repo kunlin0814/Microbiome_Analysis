@@ -1,6 +1,9 @@
 library(minerva)
 library(ggplot2)
 
+## we need to identify the input file location, where we put correlation file
+## ex: Aspergillus_fumigatus.blood (the file gives you the count of the microbe reads in tumor and blood samples)
+
 draw_correlation_plot <- function(category,candidate, x_range,y_range){
 data <- read.table(paste("/Volumes/Research_Data/Microbiome_analysis/CRC_combine_with_cufOff/Candidate_microbe/",category,"/CORR/",candidate,".blood",sep=""),
                    sep ='\t',
@@ -37,6 +40,6 @@ dev.off()
 return(plot_result)
 }
 
-draw_correlation_plot("Phylum","Firmicutes",c(0,50000),c(0,75000))
+draw_correlation_plot("Phylum","Bacteroidetes",c(0,100000),c(0,3000))
 #-(0.3*max(y)0.6)
 

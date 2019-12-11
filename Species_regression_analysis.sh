@@ -8,6 +8,9 @@
 #PBS -m ae
 
 
+## this script was used to run in cluster to see the correlation between TCGA blood and TCGA tumor
+
+
 cd /scratch/kh31516/TCGA/CRC/gt_cutoff/CORR/Species
 module load R/3.4.4-foss-2016b-X11-20160819-GACRC
 while read line 
