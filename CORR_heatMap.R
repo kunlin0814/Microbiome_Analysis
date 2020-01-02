@@ -57,7 +57,7 @@ final <- as.matrix(final)
 
 
 png(paste("CRC_Microbiome",Category,".png",sep=""),width=8000,height=9000,res=100)  
-par(oma=c(55,7,0,40))
+par(oma=c(65,7,0,40))
 
 
 

@@ -40,7 +40,8 @@ for (i in 2:colNumber) {
 if (!is.null(both_empty_column)){
  TCGA_all_species <- TCGA_all_species[,-both_empty_column]
  Gtex_all_species <- Gtex_all_species[,-both_empty_column]
-} else {
+} 
+else {
   TCGA_all_species <- as.matrix(TCGA_all_species)
   Gtex_all_species <- as.matrix(Gtex_all_species)
 }
